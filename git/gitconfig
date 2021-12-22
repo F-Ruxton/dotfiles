@@ -1,0 +1,311 @@
+[user]
+    name = Freddie Ruxton
+    first_name = Freddie
+    email = ruxton.f@gmail.com
+
+[credential]
+    helper = cache --timeout 7200
+
+[credential "https://github.com"]
+    helper =
+    helper = !/usr/bin/gh auth git-credential
+
+[core]
+    editor = vim
+
+    # Keep pager output after quitting
+    # pager = less -F -X
+    pager = delta
+
+    # Use custom `.gitignore` and `.gitattributes`.
+    excludesfile = ~/.gitignore_global
+    excludesfile = ~/.gitignore
+    attributesfile = ~/.gitattributes
+
+    # Treat spaces before tabs and all kinds of trailing whitespace as an error.
+    # [default] trailing-space: looks for spaces at the end of a line
+    # [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+    whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+
+    # Make `git rebase` safer on macOS.
+    # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+    trustctime = false
+
+    # Prevent showing files whose names contain non-ASCII symbols as unversioned.
+    # http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
+    precomposeunicode = false
+
+    # Speed up commands involving untracked files such as `git status`.
+    # https://git-scm.com/docs/git-update-index#_untracked_cache
+    untrackedCache = true
+
+[color]
+    ui = auto
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold # line info
+    old = red # deletions
+    new = green # additions
+
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+
+[commit]
+    # https://help.github.com/articles/signing-commits-using-gpg/
+    # gpgsign = true
+
+[diff]
+    tool = vimdiff
+    # Detect copies as well as renames.
+    renames = copies
+
+[diff "bin"]
+    # Use `hexdump` to diff binary files.
+    textconv = hexdump -v -C
+
+# [help]
+#     autocorrect = 10
+
+[include]
+    path = ~/.gitconfig_local
+
+[fetch]
+    prune = true
+
+[pull]
+    rebase = false
+    ff = only
+
+[push]
+    default = simple
+    # Make `git push` push relevant annotated tags when pushing branches out.
+    followTags = true
+
+[rerere]
+    enabled = true
+
+[merge]
+    conflictstyle = diff3
+    # Include summaries of merged commits in newly created merge commit messages
+    log = true
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    line-numbers = true
+    syntax-theme = Dracula
+    plus-style = "syntax #2A363B"
+    plus-emph-style = "syntax #2D4E45"
+    minus-style = "syntax #3B2C37"
+    minus-emph-style = "syntax #613038"
+
+[init]
+    defaultBranch = main
+
+[apply]
+    # Detect whitespace errors when applying a patch.
+    whitespace = fix
+
+[branch]
+    # Show most recently changed branches first.
+    sort = -committerdate
+
+# URL shorthands
+[url "git@github.com:"]
+    insteadOf = "gh:"
+    pushInsteadOf = "github:"
+    pushInsteadOf = "git://github.com/"
+
+[url "git://github.com/"]
+    insteadOf = "github:"
+
+[url "git@gist.github.com:"]
+    insteadOf = "gst:"
+    pushInsteadOf = "gist:"
+    pushInsteadOf = "git://gist.github.com/"
+
+[url "git://gist.github.com/"]
+    insteadOf = "gist:"
+
+[alias]
+    # List aliases.
+    aliases = config --get-regexp alias
+
+    a = add
+    aa = add --all
+    ap = add --patch
+    au = add --update
+
+    branches = branch --all
+    b = branch
+    ba = branch --all
+    bd = branch --delete
+    bD = branch --delete --force
+    bm = branch --move
+    bM = branch --move --force
+    bname = rev-parse --abbrev-ref HEAD
+    branch-list-merged = "!git branch --merged develop | grep -v -E '(develop|origin|master)'"
+    branch-delete-merged = "!git branch-list-merged | xargs git branch -d"
+
+    # recent branches with color
+    brr = "!_() { \
+        n=${1:-10}; \
+        colorize${2:-true}; \
+        current_branch=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD); \
+        normal_text=$(echo -e '\e[0m'); \
+        yellow_text=$(echo -e '\e[0;33m'); \
+        yellow_bg=$(echo -e '\e[7;33m'); \
+        if (colorize == true) { \
+            git for-each-ref \
+                --count=$n \
+                --sort=-committerdate refs/heads \
+                --format=$'%(refname:short)\t%(committerdate:relative)\t%(authorname)\t%(objectname:short)' \
+                    | grep "$GIT_AUTHOR_FIRST_NAME" \
+                    | column -t -s $'\t' \
+                    | sed -E "s:^(${current_branch}) :* ${yellow_bg}\1${normal_text} :" \
+                    | sed -E "s:^([^ ]+):  ${yellow_text}\1${normal_text}:" \
+        } \
+        else { \
+            git for-each-ref \
+                --count=$n \
+                --sort=-committerdate refs/heads \
+                --format=$'%(refname:short)\t%(committerdate:relative)\t%(authorname)\t%(objectname:short)' \
+                    | grep "$GIT_AUTHOR_FIRST_NAME" \
+                    | column -t -s $'\t' \
+                    | sed -E "s:^(${current_branch}) :* \1${normal_text} :" \
+                    | sed -E "s:^([^ ]+):  \1${normal_text}:" \
+        } \
+    }; _"
+
+    c = checkout
+    cb = checkout -b
+    # Checkout branch, creating it if necessary.
+    co = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+    # Checkout-recent
+    cor = "!_() { \
+      n=${1:-200}; \
+      branch=$(g brr $n false | perl -pe 's/\[0m//g' | fzf | awk '{ print $1 }' | tr -cd '[:alnum:]._-'); \
+      git checkout "$branch"; \
+    }; _"
+
+    # Clone a repository including all submodules.
+    cloneR = clone --recursive
+
+    d = diff
+    dc = diff --cached
+    ds = diff --staged
+    dw = diff --word-diff
+    # Show the diff between the latest commit and the current state.
+    d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+
+    # `git di $number` shows the diff between the state `$number` revisions ago and the current state.
+    di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+
+    # Remove branches that have already been merged with main
+    delete-merged = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+
+    fix = "!_() { git commit --fixup=$1; }; _"
+
+    f = flow
+    ff = flow feature
+    ffs = flow feature start
+    ffo = flow feature checkout
+    ffp = flow feature publish
+    fh = flow hotfix
+    fhs = flow hotfix start
+    fho = flow hotfix checkout
+    fhp = flow hotfix publish
+
+    # Find branches containing commit
+    fb = "!f() { git branch -a --contains $1; }; f"
+
+    # Find tags containing commit
+    ft = "!f() { git describe --always --contains $1; }; f"
+
+    # Find commits by source code
+    fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+
+    # Find commits by commit message
+    fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+
+    last = log -1 HEAD
+
+    # View abbreviated SHA, description, and history graph of the latest 20 commits.
+    # l = log --pretty=oneline -n 20 --graph --abbrev-commit
+    l = "!_() { git log --pretty=oneline -n ${1:-10} --graph --abbrev-commit }; _"
+    lg = log --graph
+    lk = log --graph --topo-order --abbrev-commit --date=short --decorate --all --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset'
+    lo = log --oneline
+    lp = log --patch
+    lt = log --topo-order
+
+    pf = push -f
+    pullo = pull origin
+    pusho = push origin
+    popb = !git push origin :`git bname`
+    pullb = !git pull origin `git bname`
+    pushb = !git push -u origin `git bname`
+#    # Pull in remote changes for the current repository and all its submodules.
+#    p = pull --recurse-submodules
+
+    remotes = remote --verbose
+
+    rh = reset --hard
+    rh- = "!_() { git reset --hard HEAD~\"$1\"; }; _"
+    rs = reset --soft
+    rs- = "!_() { git reset --soft HEAD~\"$1\"; }; _"
+
+    rb = rebase
+    # Interactive rebase with the given number of latest commits.
+    rbin = "!r() { git rebase -i HEAD~$1; }; r"
+
+    # Remove the old tag with this name and tag the latest commit with it.
+    retag = "!r() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; r"
+
+    # View the current working tree status using the short format.
+    s = status -s
+    ss = status --short --branch
+
+    set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
+
+    # Show verbose output about tags, branches or remotes
+    tags = tag -l
+    tidy = "!_() { \
+        git branch --format=\"%(refname:short)\" --merged $1 | grep -v \"master\" | awk '{ \
+        ans = \"?\"; \
+        while (ans == \"?\") { \
+                printf(\"Delete %s? [d/D/s/q/?] \", $1); \
+                getline ans<\"/dev/tty\"; \
+                if (ans == \"?\") { \
+                printf(\
+                    \"d - git branch -d\\n\" \
+                    \"D - git branch -D\\n\" \
+                    \"s - skip\\n\" \
+                    \"q - quit\\n\" \
+                    \"? - help\\n\" \
+                ); ans = \"?\"; \
+                } \
+                else if (ans == \"d\") { system(\"git branch -d \"$1); } \
+                else if (ans == \"D\") { system(\"git branch -D \"$1); } \
+                else if (ans == \"s\") { print \"Skipping \"$1; } \
+                else if (ans == \"q\") { exit 0; } \
+                else { ans = \"?\"; } \
+            } \
+        }'; \
+    }; _"
+
+    unstage = reset HEAD --
+    undo-commit = reset --soft HEAD^
+
+    # Show the user email for the current repository.
+    whoami = config user.email
+
