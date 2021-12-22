@@ -1,6 +1,6 @@
 [user]
     name = Freddie Ruxton
-    first_name = Freddie
+    # first_name = Freddie
     email = ruxton.f@gmail.com
 
 [credential]
@@ -161,18 +161,18 @@
         n=${1:-10}; \
         colorize${2:-true}; \
         current_branch=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD); \
-        normal_text=$(echo -e '\e[0m'); \
-        yellow_text=$(echo -e '\e[0;33m'); \
-        yellow_bg=$(echo -e '\e[7;33m'); \
+        normal_text=$(echo -e '\\e[0m'); \
+        yellow_text=$(echo -e '\\e[0;33m'); \
+        yellow_bg=$(echo -e '\\e[7;33m'); \
         if (colorize == true) { \
             git for-each-ref \
                 --count=$n \
                 --sort=-committerdate refs/heads \
-                --format=$'%(refname:short)\t%(committerdate:relative)\t%(authorname)\t%(objectname:short)' \
+                --format=$'%(refname:short)\\t%(committerdate:relative)\\t%(authorname)\\t%(objectname:short)' \
                     | grep "$GIT_AUTHOR_FIRST_NAME" \
                     | column -t -s $'\t' \
-                    | sed -E "s:^(${current_branch}) :* ${yellow_bg}\1${normal_text} :" \
-                    | sed -E "s:^([^ ]+):  ${yellow_text}\1${normal_text}:" \
+                    | sed -E \"s:^(${current_branch}) :* ${yellow_bg}\\1${normal_text} :\" \
+                    | sed -E \"s:^([^ ]+):  ${yellow_text}\\1${normal_text}:\" \
         } \
         else { \
             git for-each-ref \
@@ -181,8 +181,8 @@
                 --format=$'%(refname:short)\t%(committerdate:relative)\t%(authorname)\t%(objectname:short)' \
                     | grep "$GIT_AUTHOR_FIRST_NAME" \
                     | column -t -s $'\t' \
-                    | sed -E "s:^(${current_branch}) :* \1${normal_text} :" \
-                    | sed -E "s:^([^ ]+):  \1${normal_text}:" \
+                    | sed -E \"s:^(${current_branch}) :* \\1${normal_text} :\" \
+                    | sed -E \"s:^([^ ]+):  \\1${normal_text}:\" \
         } \
     }; _"
 
@@ -193,8 +193,8 @@
     # Checkout-recent
     cor = "!_() { \
       n=${1:-200}; \
-      branch=$(g brr $n false | perl -pe 's/\[0m//g' | fzf | awk '{ print $1 }' | tr -cd '[:alnum:]._-'); \
-      git checkout "$branch"; \
+      branch=$(g brr $n false | perl -pe 's/\\[0m//g' | fzf | awk '{ print $1 }' | tr -cd '[:alnum:]._-'); \
+      git checkout \"$branch\"; \
     }; _"
 
     # Clone a repository including all submodules.
