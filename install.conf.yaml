@@ -13,6 +13,10 @@
     ~/.ipython: python/ipython
     ~/.jupyter: python/jupyter
     ~/.vscode: vscode
+    ~/.task: taskwarrior/task
+    ~/.taskrc: taskwarrior/taskrc
+    ~/.taskopenrc: taskwarrior/taskopenrc
+    ~/.vit: taskwarrior/vit
 
 # - create:
 
