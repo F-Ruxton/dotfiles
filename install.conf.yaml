@@ -17,8 +17,8 @@
     ~/.taskrc: taskwarrior/taskrc
     ~/.taskopenrc: taskwarrior/taskopenrc
     ~/.vit: taskwarrior/vit
-
-# - create:
+    ~/.zshrc: shell/zshrc
+    ~/.p10k.zsh: shell/p10k.zsh
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
