@@ -12,6 +12,7 @@
     ~/.conda: python/conda
     ~/.ipython: python/ipython
     ~/.jupyter: python/jupyter
+    ~/.vscode: vscode
 
 # - create:
 
