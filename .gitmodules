@@ -2,3 +2,6 @@
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
 	ignore = dirty
+[submodule "taskwarrior/task/taskwarrior/task/taskopen"]
+	path = taskwarrior/task/taskwarrior/task/taskopen
+	url = https://github.com/jschlatow/taskopen
