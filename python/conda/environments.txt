@@ -1,0 +1,13 @@
+/home/freddieruxton/miniconda3
+/home/freddieruxton/Documents/Projects/holoviz_tutorial/envs/default
+/home/freddieruxton/Documents/Projects/pyviz-examples/landsat/envs/default
+/home/freddieruxton/miniconda3/envs/fuel-optimized-routing
+/home/freddieruxton/miniconda3/envs/cartopy-tutorial
+/home/freddieruxton/miniconda3/envs/headron-core-mamba
+/home/freddieruxton/miniconda3/envs/jinja2-experiments
+/home/freddieruxton/miniconda3/envs/headron-utils
+/home/freddieruxton/miniconda3/envs/headron-core
+/home/freddieruxton/miniconda3/envs/test-inheritance-experiment
+/home/freddieruxton/miniconda3/envs/git-pro
+/home/freddieruxton/miniconda3/envs/hu-tmp
+/home/freddieruxton/miniconda3/envs/vit
