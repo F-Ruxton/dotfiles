@@ -6,6 +6,7 @@
 
 - link:
     ~/.config/kitty: kitty
+    ~/.config/nvim: nvim
     ~/.editorconfig: editorconfig/editorconfig
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/gitignore
