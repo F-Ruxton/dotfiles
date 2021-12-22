@@ -50,6 +50,7 @@ brew install fzf
 brew install git
 brew install git-lfs
 brew install gh
+brew install git-delta
 brew install httpie
 brew install imagemagick
 brew install lua
