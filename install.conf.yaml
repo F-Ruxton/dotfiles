@@ -9,6 +9,9 @@
     ~/.editorconfig: editorconfig/editorconfig
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/gitignore
+    ~/.conda: python/conda
+    ~/.ipython: python/ipython
+    ~/.jupyter: python/jupyter
 
 # - create:
 
