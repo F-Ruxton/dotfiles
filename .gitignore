@@ -1,3 +1,4 @@
 taskwarrior/task/certificates
 **/*.log
 **/*.data
+vscode/extensions
