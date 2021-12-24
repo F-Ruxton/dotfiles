@@ -1,0 +1,8 @@
+channels:
+  - pyviz
+  - conda-forge
+  - defaults
+
+always_yes: True
+
+env_prompt: '({default_env}) '
