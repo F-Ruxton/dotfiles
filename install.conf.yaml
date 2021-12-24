@@ -5,12 +5,12 @@
 - clean: ['~']
 
 - link:
+    ~/.config/conda: python/conda
     ~/.config/kitty: kitty
     ~/.config/nvim: nvim
     ~/.editorconfig: editorconfig/editorconfig
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/gitignore
-    ~/.conda: python/conda
     ~/.ipython: python/ipython
     ~/.jupyter: python/jupyter
     ~/.vscode: vscode
