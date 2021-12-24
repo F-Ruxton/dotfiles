@@ -95,13 +95,13 @@ endif
 
 call plug#begin(data_dir . '/plugins')
 
-source ~/.config/nvim/plugins/abolish.vim
+" source ~/.config/nvim/plugins/abolish.vim
 source ~/.config/nvim/plugins/airline.vim
 source ~/.config/nvim/plugins/coc.vim
 source ~/.config/nvim/plugins/commentary.vim
 source ~/.config/nvim/plugins/context-commentstring.vim
 source ~/.config/nvim/plugins/dispatch.vim
-source ~/.config/nvim/plugins/dracula.vim
+" source ~/.config/nvim/plugins/dracula.vim
 source ~/.config/nvim/plugins/editorconfig.vim
 source ~/.config/nvim/plugins/eunuch.vim
 source ~/.config/nvim/plugins/exchange.vim
@@ -127,7 +127,6 @@ source ~/.config/nvim/plugins/splitjoin.vim
 source ~/.config/nvim/plugins/surround.vim
 source ~/.config/nvim/plugins/targets.vim
 source ~/.config/nvim/plugins/textobj-xmlattr.vim
-source ~/.config/nvim/plugins/tmux-navigator.vim
 source ~/.config/nvim/plugins/unimpaired.vim
 source ~/.config/nvim/plugins/vim-test.vim
 source ~/.config/nvim/plugins/visual-multi.vim
@@ -143,7 +142,12 @@ doautocmd User PlugLoaded
 
 augroup FileTypeOverrides
     autocmd!
-    " Use '//' instead of '/* */' comments
-    autocmd FileType php setlocal commentstring=//%s
     autocmd TermOpen * setlocal nospell
 augroup END
+
+
+"--------------------------------------------------------------------------
+" Python
+let g:python_host_prog = '/Users/freddieruxton/miniconda3/envs/nvim-2.7/bin/python'
+let g:python3_host_prog = '/Users/freddieruxton/miniconda3/envs/nvim-3.10/bin/python'
+
