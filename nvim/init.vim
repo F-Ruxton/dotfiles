@@ -128,7 +128,7 @@ source ~/.config/nvim/plugins/surround.vim
 source ~/.config/nvim/plugins/targets.vim
 source ~/.config/nvim/plugins/textobj-xmlattr.vim
 source ~/.config/nvim/plugins/unimpaired.vim
-"source ~/.config/nvim/plugins/vimspector.vim
+source ~/.config/nvim/plugins/vimspector.vim
 source ~/.config/nvim/plugins/vim-pythonsense.vim
 source ~/.config/nvim/plugins/vim-test.vim
 source ~/.config/nvim/plugins/visual-multi.vim
