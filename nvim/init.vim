@@ -1,8 +1,8 @@
 "--------------------------------------------------------------------------
 
-set expandtab
-set shiftwidth=4
 set tabstop=4
+set shiftwidth=4
+set expandtab
 set hidden
 set signcolumn=yes:2
 set relativenumber
@@ -110,6 +110,7 @@ source ~/.config/nvim/plugins/fugitive.vim
 source ~/.config/nvim/plugins/fzf.vim
 source ~/.config/nvim/plugins/gruvbox.vim
 source ~/.config/nvim/plugins/heritage.vim
+source ~/.config/nvim/plugins/indent-line.vim
 source ~/.config/nvim/plugins/lastplace.vim
 source ~/.config/nvim/plugins/lion.vim
 source ~/.config/nvim/plugins/markdown-preview.vim
