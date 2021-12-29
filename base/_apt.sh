@@ -12,7 +12,7 @@ sudo apt -qq update
 # Upgrade any already-installed packages
 sudo apt upgrade
 
-ai coreutils # install GNU core utilities 
+ai coreutils # install GNU core utilities
 ai moreutils  # other useful utilities like sponge
 ai findutils  # GNU find, locate, updatedb, and xargs, g-prefixed
 ai wget
@@ -36,7 +36,7 @@ ai git
 # git-delta, a syntax-highlighting pager for git and diff output; TODO watch for update: https://github.com/dandavison/delta#installation
 arch=$([[ $(uname -m) == "x86_64" ]] && echo "amd64" || echo "armhf")
 musl=$([[ $(lsb_release -r | cut -f2) == "20.04" ]] && echo "" || echo "-musl") # https://github.com/dandavison/delta/issues/504
-curl -fsSL https://github.com/dandavison/delta/releases/download/0.11.0/git-delta${musl}_0.11.0_$arch.deb -o /tmp/git-delta_$arch.deb && sudo dpkg -i /tmp/git-delta_$arch.deb 
+curl -fsSL https://github.com/dandavison/delta/releases/download/0.11.0/git-delta${musl}_0.11.0_$arch.deb -o /tmp/git-delta_$arch.deb && sudo dpkg -i /tmp/git-delta_$arch.deb
 
 ai git-lfs
 ai gh
@@ -57,7 +57,7 @@ ai zopfli
 
 # zsh and plugin manager
 ai zsh
-ai zplug
+curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
 # Install fonts
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
