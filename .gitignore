@@ -4,3 +4,4 @@ taskwarrior/task/certificates
 vscode/extensions
 python/ipython/profile_default/db
 python/ipython/profile_default/history.sqlite
+nvim/pack
