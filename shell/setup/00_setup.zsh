@@ -5,6 +5,10 @@ HYPHEN_INSENSITIVE="false"
 ENABLE_CORRECTION="false"
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="yyyy-mm-dd"
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=1000
+setopt SHARE_HISTORY
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -24,12 +28,6 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
     export EDITOR='nvim'
 fi
-
-
-# Search history with up and down arrows
-# https://unix.stackexchange.com/questions/97843/how-can-i-search-history-with-text-already-entered-at-the-prompt-in-zsh/405358#405358
-bindkey '^[[A' up-line-or-search
-bindkey '^[[B' down-line-or-search
 
 # Disable tab-completion bell
 unsetopt BEEP
