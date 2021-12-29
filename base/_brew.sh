@@ -73,6 +73,7 @@ brew install font-jetbrains-mono-nerd-font
 # zsh and plugin manager
 brew install zsh
 brew install zplug
+ln "$BREW_PREFIX/zplug" "$HOME/.zplug"
 
 # Remove outdated versions from the cellar.
 brew cleanup
