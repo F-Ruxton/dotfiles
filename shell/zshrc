@@ -8,7 +8,7 @@
         source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
     fi
 
-    export ZPLUG_HOME=/usr/local/opt/zplug
+    export ZPLUG_HOME="$HOME/.zplug"
     source $ZPLUG_HOME/init.zsh
 
     zplug "plugins/common-aliases", from:oh-my-zsh
