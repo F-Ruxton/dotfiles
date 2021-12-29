@@ -101,12 +101,13 @@
     diffFilter = delta --color-only
 
 [delta]
+    navigate = true
     line-numbers = true
-    syntax-theme = Dracula
-    plus-style = "syntax #2A363B"
-    plus-emph-style = "syntax #2D4E45"
-    minus-style = "syntax #3B2C37"
-    minus-emph-style = "syntax #613038"
+    syntax-theme = gruvbox
+    ; plus-style = "syntax #2A363B"
+    ; plus-emph-style = "syntax #2D4E45"
+    ; minus-style = "syntax #3B2C37"
+    ; minus-emph-style = "syntax #613038"
 
 [init]
     defaultBranch = main
@@ -240,8 +241,7 @@
     last = log -1 HEAD
 
     # View abbreviated SHA, description, and history graph of the latest 20 commits.
-    # l = log --pretty=oneline -n 20 --graph --abbrev-commit
-    l = "!_() { git log --pretty=oneline -n ${1:-10} --graph --abbrev-commit }; _"
+    l = "!f() { git log --pretty=oneline -n "${1:-10}" --graph --abbrev-commit; }; f"
     lg = log --graph
     lk = log --graph --topo-order --abbrev-commit --date=short --decorate --all --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset'
     lo = log --oneline
