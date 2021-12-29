@@ -17,8 +17,6 @@ ai moreutils  # other useful utilities like sponge
 ai findutils  # GNU find, locate, updatedb, and xargs, g-prefixed
 ai wget
 ai gnupg # install GnuPG to enable PGP-signing commits
-ai vim
-ai neovim
 ai grep
 ai screen
 ai libgmp3-dev
@@ -52,8 +50,10 @@ ai tree
 ai vbindiff
 ai zopfli
 
-# z directory jumper
-# wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/.z
+# install up-to-date neovim
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+chmod u+x nvim.appimage
+sudo mv nvim.appimage /usr/local/bin/nvim
 
 # zsh and plugin manager
 ai zsh
