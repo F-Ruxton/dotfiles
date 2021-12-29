@@ -2,3 +2,5 @@ taskwarrior/task/certificates
 **/*.log
 **/*.data
 vscode/extensions
+python/ipython/profile_default/db
+python/ipython/profile_default/history.sqlite
