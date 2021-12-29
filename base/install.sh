@@ -20,8 +20,8 @@ echo "Machine OS = ${machine}"$SCRIPT_DIR
 . "$SCRIPT_DIR/_common.sh"
 
 case "$machine" in
-    Mac) script=_mac.sh;;
-    Linux) script=_linux.sh;;
+    Mac) script=_brew.sh;;
+    Linux) script=_apt.sh;;
     *)
 esac
 
