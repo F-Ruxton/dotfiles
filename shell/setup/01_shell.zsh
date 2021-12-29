@@ -23,7 +23,7 @@ v() {
         z $1
     fi
 
-    nvim
+    vim .
 }
 
 # git flag currently disabled in ubuntu https://github.com/ogham/exa/issues/761
