@@ -1,62 +1,66 @@
 #!/usr/bin/env bash
 
-# This file is WIP and needs to be finished on a linux os
-
 # Install command-line tools using apt
+function ai() {
+  # -qq makes install less noisy
+  sudo apt install -y -qq "$@"
+}
 
 # Make sure we’re using the latest apt
-apt update
+sudo apt -qq update
 
 # Upgrade any already-installed packages
-apt upgrade
+sudo apt upgrade
 
-# Install GNU core utilities 
-apt install coreutils
-apt install moreutils  # other useful utilities like sponge
-apt install findutils  # GNU find, locate, updatedb, and xargs, g-prefixed
-apt install wget
-apt install gnupg # Install GnuPG to enable PGP-signing commits
-apt install vim
-apt install neovim
-apt install grep
-apt install openssh
-apt install screen
-apt install gmp
+ai coreutils # install GNU core utilities 
+ai moreutils  # other useful utilities like sponge
+ai findutils  # GNU find, locate, updatedb, and xargs, g-prefixed
+ai wget
+ai gnupg # install GnuPG to enable PGP-signing commits
+ai vim
+ai neovim
+ai grep
+ai screen
+ai libgmp3-dev
+ai ack
+ai bat
+ai exa
 
-# Install font tools.
-apt tap bramstein/webfonttools
-apt install sfnt2woff
-apt install sfnt2woff-zopfli
-apt install woff2
+# Install, link fdfind as fd
+ai fd-find
+ln -s $(which fdfind) ~/.local/bin/fd
 
-# Install nerdfonts - https://gist.github.com/matthewjberger/7dd7e079f282f8138a9dc3b045ebefa0
-#apt tap homeapt/cask-fonts
-#apt install --cask font-hack-nerd-font
-#apt install font-jetbrains-mono-nerd-font
+ai fzf
+ai git
 
-# Install other useful binaries.
-apt install ack
-apt install bat
-apt install exa
-apt install fd
-apt install fzf
-apt install git
-apt install git-lfs
-apt install gh
-apt install httpie
-apt install imagemagick
-apt install lua
-apt install pigz
-apt install pv
-apt install rename
-apt install ripgrep
-apt install rlwrap
-apt install ssh-copy-id
-apt install tree
-apt install vbindiff
-apt install z
-apt install zopfli
+# git-delta, a syntax-highlighting pager for git and diff output; TODO watch for update: https://github.com/dandavison/delta#installation
+arch=$([[ $(uname -m) == "x86_64" ]] && echo "amd64" || echo "armhf")
+musl=$([[ $(lsb_release -r | cut -f2) == "20.04" ]] && echo "" || echo "-musl") # https://github.com/dandavison/delta/issues/504
+curl -fsSL https://github.com/dandavison/delta/releases/download/0.11.0/git-delta${musl}_0.11.0_$arch.deb -o /tmp/git-delta_$arch.deb && sudo dpkg -i /tmp/git-delta_$arch.deb 
+
+ai git-lfs
+ai gh
+ai httpie
+ai imagemagick
+ai lua5.4
+ai pigz
+ai pv
+ai rename
+ai ripgrep
+ai rlwrap
+ai tree
+ai vbindiff
+ai zopfli
+
+# z directory jumper
+# wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/.z
 
 # zsh and plugin manager
-apt install zsh
-apt install zplug
+ai zsh
+ai zplug
+
+# Install fonts
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
+
+# Cleanup
+sudo apt autoclean
