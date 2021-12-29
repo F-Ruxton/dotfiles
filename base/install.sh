@@ -15,9 +15,9 @@ if [ "$machine" == "UNKNOWN" ] ; then
     exit
 fi
 
-echo "Machine OS = ${machine}"$SCRIPT_DIR
+echo "Machine OS = ${machine}"
 
-. "$SCRIPT_DIR/_common.sh"
+. "$SCRIPT_DIR/_common.sh" "$machine"
 
 case "$machine" in
     Mac) script=_brew.sh;;
