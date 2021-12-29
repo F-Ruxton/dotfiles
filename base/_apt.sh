@@ -60,7 +60,9 @@ ai zsh
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
 # Install fonts
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
+ai fonts-powerline
+git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git /tmp/nerd-fonts
+. /tmp/nerd-fonts/install.sh JetBrainsMono
 
 # Cleanup
 sudo apt autoclean
