@@ -10,22 +10,25 @@ print("imported os")
 from pathlib import Path
 
 print("imported pathlib.Path")
-from typing import (
-    Any,
-    Callable,
-    Dict,
-    List,
-    Iterator,
-    Optional,
-    Tuple,
-    Type,
-    TypeVar,
-    Union,
-    Sized,
-    Generator,
-)
 
-print("imported types")
+try:
+    from typing import (
+        Any,
+        Callable,
+        Dict,
+        List,
+        Iterator,
+        Optional,
+        Tuple,
+        Type,
+        TypeVar,
+        Union,
+        Sized,
+        Generator,
+    )
+    print("imported types")
+except ModuleNotFoundError as e:
+    print(e)
 
 
 try:
@@ -36,9 +39,14 @@ except ModuleNotFoundError as e:
     print(e)
 
 try:
+    import dask
     import dask.dataframe as dd
+    from dask.distributed import Client, LocalCluster
 
+    print("imported dask")
     print("imported dask.dataframe as dd")
+    print("imported dask.distributed.Client")
+    print("imported dask.distributed.LocalCluster")
 except ModuleNotFoundError as e:
     print(e)
 
