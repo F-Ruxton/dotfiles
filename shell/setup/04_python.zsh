@@ -10,9 +10,11 @@ alias py='python'
 alias pyc='python -c'
 alias ipy='ipython'
 
-# ## poetry
-# alias p="poetry"
-# alias prp="poetry run python"
+## poetry
+alias p="poetry"
+alias pa="poetry add"
+alias pad="poetry add --dev"
+alias prp="poetry run python"
 
 ## conda
 alias ca='conda activate'
