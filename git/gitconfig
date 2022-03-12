@@ -38,6 +38,7 @@
     # Speed up commands involving untracked files such as `git status`.
     # https://git-scm.com/docs/git-update-index#_untracked_cache
     untrackedCache = true
+	autocrlf = input
 
 [color]
     ui = auto
@@ -154,7 +155,7 @@
     bm = branch --move
     bM = branch --move --force
     bname = rev-parse --abbrev-ref HEAD
-    branch-list-merged = "!git branch --merged develop | grep -v -E '(develop|origin|master)'"
+    branch-list-merged = "!_() { git branch --merged \"$1\" | grep -v -E '(develop|origin|master)' }; _"
     branch-delete-merged = "!git branch-list-merged | xargs git branch -d"
 
     # recent branches with color
@@ -187,26 +188,30 @@
         } \
     }; _"
 
-    c = checkout
-    cb = checkout -b
+    c = commit -m
+
+    co = checkout
+    cob = checkout -b
     # Checkout branch, creating it if necessary.
-    co = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+    # co = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
     # Checkout-recent
-    cor = "!_() { \
-      n=${1:-200}; \
-      branch=$(g brr $n false | perl -pe 's/\\[0m//g' | fzf | awk '{ print $1 }' | tr -cd '[:alnum:]._-'); \
-      git checkout \"$branch\"; \
-    }; _"
+    ; cor = "!_() { \
+    ;   n=${1:-200}; \
+    ;   branch=$(g brr $n false | perl -pe 's/\\[0m//g' | fzf | awk '{ print $1 }' | tr -cd '[:alnum:]._-'); \
+    ;   git checkout \"$branch\"; \
+    ; }; _"
 
     # Clone a repository including all submodules.
     cloneR = clone --recursive
 
     d = diff
     dc = diff --cached
+    # diff files
+    df = !"git diff $1 -- \"$@{:2}\""
     ds = diff --staged
     dw = diff --word-diff
-    # Show the diff between the latest commit and the current state.
-    d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+    # diff last: Show the diff between the latest commit and the current state.
+    dl = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 
     # `git di $number` shows the diff between the state `$number` revisions ago and the current state.
     di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
@@ -248,6 +253,8 @@
     lp = log --patch
     lt = log --topo-order
 
+    m = merge
+
     pf = push -f
     pullo = pull origin
     pusho = push origin
@@ -265,6 +272,7 @@
     rs- = "!_() { git reset --soft HEAD~\"$1\"; }; _"
 
     rb = rebase
+    rbi = rebase -i
     # Interactive rebase with the given number of latest commits.
     rbin = "!r() { git rebase -i HEAD~$1; }; r"
 
