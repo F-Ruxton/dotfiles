@@ -11,7 +11,7 @@ function  brew-update-all() {
 # ==============================================================================
 # General
 
-alias loadkeymap=". ~/.config/xkb/.xprofile"
+alias lkm=". ~/.config/xkb/.xprofile"
 alias vim="nvim"
 alias copy="xclip -selection clipboard"
 alias paste="xclip -o -selection clipboard"
