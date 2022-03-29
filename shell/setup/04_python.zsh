@@ -2,8 +2,10 @@
 # Python
 
 # pipx
-# enable autocompletion
-# eval "$(register-python-argcomplete pipx)"
+# enable autocompletion: requires
+#   autoload -U bashcompinit
+#   bashcompinit
+eval "$(register-python-argcomplete pipx)"
 
 # ipython
 alias py='python'
@@ -17,6 +19,7 @@ alias pad="poetry add --dev"
 alias prp="poetry run python"
 
 ## conda
+alias c='conda'
 alias ca='conda activate'
 alias cdeactivate='conda deactivate'
 alias ci='conda install'
@@ -24,7 +27,6 @@ alias ce='conda env'
 alias cre='conda env remove -n'
 alias cl='conda list'
 alias cs='conda search'
-alias cce='conda-create-env'
 alias cee='conda-export-env'
 alias ceep='conda-export-env-pip'
 
@@ -52,21 +54,35 @@ function cel() {
   fi
 }
 
-
-function conda-create-env() {
+function cce() {
   # create and actiate a new conda environment
   if [ -z "$1" ] ; then
     echo "No name given, exiting"
     return 1
   else
-    env_name="$1"
+    _env_name="$1"
+  fi
+
+  if [ -z "$2" ] ; then
+    echo "No python version given, exiting"
+    return 1
+  else
+    _python_version="$2"
   fi
 
   echo "Creating conda environment $env_name..."
-  conda create --name "$env_name" python=3.9 "${@:2}" -y
-  echo "Activating environment $env_name..."
-  conda activate "$env_name"
+  conda create --name "$_env_name" python="$_python_version" "${@:3}" -y
+  echo "Activating environment $_env_name ($_python_version)..."
+  cdeactivate
+  conda activate "$_env_name"
 }
+
+function ceu() {
+  _file="${1:-environment.yml}"
+  echo "Updating conda environment from file $_file..."
+  conda env update -f "$_file"
+}
+
 
 function conda-nb-kernel-from-env() {
   # create a notebook kernel from a conda enironment
@@ -108,8 +124,6 @@ function conda-rename-env() {
 # Jupyter
 alias jl='jupyter lab'
 # alias jupyter-scaffold=". $projectroot/utils/jupyter-scaffold/scaffold.sh"
-# alias js="jupyter-scaffold"
-# alias jsa="jupyter-scaffold true true"
 
 # ===================================================================
 # Python Virtual Env Managers
