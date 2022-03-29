@@ -30,7 +30,7 @@
 
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-    # os_icon               # os identifier
+#    os_icon               # os identifier
     dir                     # current directory
     vcs                     # git status
     prompt_char             # prompt symbol
@@ -49,7 +49,7 @@
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
     anaconda                # conda environment (https://conda.io/)
     pyenv                   # python environment (https://github.com/pyenv/pyenv)
-    goenv                   # go environment (https://github.com/syndbg/goenv)
+#    goenv                   # go environment (https://github.com/syndbg/goenv)
     nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
     nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
     nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
@@ -61,15 +61,15 @@
     # laravel_version       # laravel php framework version (https://laravel.com/)
     # java_version          # java version (https://www.java.com/)
     # package               # name@version from package.json (https://docs.npmjs.com/files/package.json)
-    rbenv                   # ruby version from rbenv (https://github.com/rbenv/rbenv)
-    rvm                     # ruby version from rvm (https://rvm.io)
-    fvm                     # flutter version management (https://github.com/leoafarias/fvm)
-    luaenv                  # lua version from luaenv (https://github.com/cehoffman/luaenv)
-    jenv                    # java version from jenv (https://github.com/jenv/jenv)
-    plenv                   # perl version from plenv (https://github.com/tokuhirom/plenv)
-    phpenv                  # php version from phpenv (https://github.com/phpenv/phpenv)
-    scalaenv                # scala version from scalaenv (https://github.com/scalaenv/scalaenv)
-    haskell_stack           # haskell version from stack (https://haskellstack.org/)
+#    rbenv                   # ruby version from rbenv (https://github.com/rbenv/rbenv)
+#    rvm                     # ruby version from rvm (https://rvm.io)
+#    fvm                     # flutter version management (https://github.com/leoafarias/fvm)
+#    luaenv                  # lua version from luaenv (https://github.com/cehoffman/luaenv)
+#    jenv                    # java version from jenv (https://github.com/jenv/jenv)
+#    plenv                   # perl version from plenv (https://github.com/tokuhirom/plenv)
+#    phpenv                  # php version from phpenv (https://github.com/phpenv/phpenv)
+#    scalaenv                # scala version from scalaenv (https://github.com/scalaenv/scalaenv)
+#    haskell_stack           # haskell version from stack (https://haskellstack.org/)
     kubecontext             # current kubernetes context (https://kubernetes.io/)
     terraform               # terraform workspace (https://www.terraform.io)
     # terraform_version     # terraform version (https://www.terraform.io)
@@ -80,13 +80,13 @@
     google_app_cred         # google application credentials (https://cloud.google.com/docs/authentication/production)
     toolbox                 # toolbox name (https://github.com/containers/toolbox)
     context                 # user@hostname
-    nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
-    ranger                  # ranger shell (https://github.com/ranger/ranger)
-    nnn                     # nnn shell (https://github.com/jarun/nnn)
-    xplr                    # xplr shell (https://github.com/sayanarijit/xplr)
+#    nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
+#    ranger                  # ranger shell (https://github.com/ranger/ranger)
+#    nnn                     # nnn shell (https://github.com/jarun/nnn)
+#    xplr                    # xplr shell (https://github.com/sayanarijit/xplr)
     vim_shell               # vim shell indicator (:sh)
-    midnight_commander      # midnight commander shell (https://midnight-commander.org/)
-    nix_shell               # nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html)
+#    midnight_commander      # midnight commander shell (https://midnight-commander.org/)
+#    nix_shell               # nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html)
     # vpn_ip                # virtual private network indicator
     # load                  # CPU load
     # disk_usage            # disk usage
@@ -102,6 +102,7 @@
     # battery               # internal battery
     # wifi                  # wifi speed
     # example               # example user-defined segment (see prompt_example function below)
+    arch
   )
 
   # Defines character set used by powerlevel10k. It's best to let `p10k configure` set it for you.
@@ -204,7 +205,9 @@
   typeset -g POWERLEVEL9K_DIR_FOREGROUND=31
   # If directory is too long, shorten some of its segments to the shortest possible unique
   # prefix. The shortened directory can be tab-completed to the original.
-  typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
+    # typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
+  # Show name of current directory only
+  typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_last
   # Replace removed segment suffixes with this symbol.
   typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=
   # Color of the shortened directory segments.
@@ -1547,6 +1550,24 @@
   # Type `p10k help segment` for documentation and a more sophisticated example.
   function prompt_example() {
     p10k segment -f 208 -i '⭐' -t 'hello, %n'
+  }
+
+  function prompt_arch() {
+    declare -A archs
+    declare -A arch_colors
+    archs=(
+        ["arm64"]=""
+        ["x86_64"]="🌹"
+    )
+    arch_colors=(
+        ["arm64"]="yellow"
+        ["x86_64"]="red"
+    )
+    arch=$(uname -m)
+    label=$archs[$arch]
+    color=$arch_colors[$arch]
+
+    p10k segment -f 208 -t "$label" -f "$color"
   }
 
   # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job

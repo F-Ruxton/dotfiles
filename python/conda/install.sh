@@ -1,21 +1,23 @@
 #!/usr/bin/env bash
 
 function install-conda() {
-  unameOut="$(uname -s)"
-  case "${unameOut}" in
-      Linux*)  script=Linux;;
-      Darwin*) script=MacOSX;;
-      *)       script="UNKNOWN"
+  os_name_raw="$(uname -s)"
+  machine_name="$(uname -m)"
+
+  case "${os_name_raw}" in
+      Linux*)  os_name=Linux;;
+      Darwin*) os_name=MacOSX;;
+      *)       os_name="UNKNOWN"
   esac
 
-  if [ "$script" == "UNKNOWN" ] ; then
-      echo "Unknown machine: ${unameOut}"
+  if [ "$os_name" == "UNKNOWN" ] ; then
+      echo "Unknown machine: ${os_name_raw}"
       echo "Exiting"
       exit
   fi
 
   url_base=https://repo.anaconda.com/miniconda
-  script_complete="Miniconda3-latest-$script-x86_64.sh"
+  script_complete="Miniconda3-latest-$os_name-$machine_name.sh"
   url_complete="$url_base/$script_complete"
   script_dir=~/miniconda3
   script_path="$script_dir/miniconda.sh"

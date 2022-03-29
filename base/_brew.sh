@@ -65,6 +65,10 @@ brew install vbindiff
 brew install z
 brew install zopfli
 
+# install pipx: in apt version must install using pip
+brew install pipx
+pipx ensurepath
+
 # Install nerdfonts
 brew tap homebrew/cask-fonts
 brew install --cask font-hack-nerd-font
@@ -73,7 +77,7 @@ brew install font-jetbrains-mono-nerd-font
 # zsh and plugin manager
 brew install zsh
 brew install zplug
-ln "$BREW_PREFIX/zplug" "$HOME/.zplug"
+ln -s "$(brew --prefix zplug)" "$HOME/.zplug"
 
 # Remove outdated versions from the cellar.
 brew cleanup

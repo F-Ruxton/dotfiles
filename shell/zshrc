@@ -1,3 +1,12 @@
+# Detect if running on M1 mac
+
+if [ "$(uname -m)" = "arm64" ] ; then
+  export MAC_ARCH="M1"
+else
+  export MAC_ARCH="Intel"
+fi
+
+
 # Plugins {{{
 # ==============================================================================
 
@@ -17,7 +26,7 @@
     zplug "plugins/docker-compose", from:oh-my-zsh
     zplug "plugins/fzf",            from:oh-my-zsh
     zplug "plugins/git",            from:oh-my-zsh
-    zplug "plugins/git-flow",       from:oh-my-zsh
+    zplug "plugins/gitflow",       from:oh-my-zsh
     zplug "plugins/httpie",         from:oh-my-zsh
     zplug "plugins/z",              from:oh-my-zsh
     zplug "zsh-users/zsh-completions",              defer:0
@@ -43,8 +52,8 @@
     # Enable bash completion
     #[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
-    #autoload -U bashcompinit
-    #bashcompinit
+    autoload -U bashcompinit
+    bashcompinit
 # }}}
 
 # Load Configuration, Aliases and Functions by Topic {{{
@@ -65,16 +74,26 @@
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('~/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+
+if [ "$MAC_ARCH" = "M1" ] ; then
+    echo "M1 Mac Conda Setup"
+    __conda_path="/Users/freddieruxton/opt/anaconda3"
+    __conda_setup="$('/Users/freddieruxton/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+else
+    echo "Intel Mac Conda Setup"
+    __conda_path="/usr/local/anaconda3"
+    __conda_setup="$('/usr/local/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+fi
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "$__conda_path/etc/profile.d/conda.sh" ]; then
+        . "$__conda_path/etc/profile.d/conda.sh"
     else
-        export PATH="$HOME/miniconda3/bin:$PATH"
+        export PATH="$__conda_path/bin:$PATH"
     fi
 fi
+unset __conda_path
 unset __conda_setup
 # <<< conda initialize <<<
 
@@ -90,3 +109,9 @@ export NVM_DIR="$HOME/.nvm"
 # }}}
 
 export PATH="$HOME/.poetry/bin:$PATH"
+
+# Created by `pipx` on 2022-03-12 21:19:05
+export PATH="$PATH:/Users/freddieruxton/.local/bin"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
+
