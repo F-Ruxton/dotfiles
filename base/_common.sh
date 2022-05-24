@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 
-machine=$1
+machine="$1"
 
 echo "Install common tools (machine = $machine)"
 
-# Kitty terminal emulator
-curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-
 if [ "$machine" == Linux ] ; then
+  # Kitty terminal emulator
+  curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
   # https://sw.kovidgoyal.net/kitty/binary/#desktop-integration-on-linux
   # Create a symbolic link to add kitty to PATH
   ln -s ~/.local/kitty.app/bin/kitty ~/.local/bin/

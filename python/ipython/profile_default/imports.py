@@ -47,7 +47,7 @@ try:
     print("imported dask.dataframe as dd")
     print("imported dask.distributed.Client")
     print("imported dask.distributed.LocalCluster")
-except ModuleNotFoundError as e:
+except ImportError as e:
     print(e)
 
 try:

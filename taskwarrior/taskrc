@@ -14,15 +14,15 @@
 data.location=~/.task
 
 # Sync config
-taskd.certificate=/home/freddieruxton/.task/certificates/private.certificate.pem
-taskd.key=/home/freddieruxton/.task/certificates/private.key.pem
-taskd.ca=/home/freddieruxton/.task/certificates/ca.cert.pem
+taskd.certificate=/Users/freddieruxton/.task/certificates/private.certificate.pem
+taskd.key=/Users/freddieruxton/.task/certificates/private.key.pem
+taskd.ca=/Users/freddieruxton/.task/certificates/ca.cert.pem
 taskd.server=inthe.am:53589
 taskd.credentials=inthe_am/ruxton.f/fbf26845-ef1a-465c-8aa6-24bc39c6d313
 taskd.trust=strict
 
 # Color theme (uncomment one to use)
-include /usr/share/taskwarrior/dark-256.theme
+include  /usr/local/share/doc/task/rc/dark-256.theme
 #include /usr/share/taskwarrior/light-16.theme
 #include /usr/share/taskwarrior/light-256.theme
 #include /usr/share/taskwarrior/dark-16.theme

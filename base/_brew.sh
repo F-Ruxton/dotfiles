@@ -54,12 +54,14 @@ brew install git-delta
 brew install httpie
 brew install imagemagick
 brew install lua
+brew install midnight-commander
 brew install pigz
 brew install pv
 brew install rename
 brew install ripgrep
 brew install rlwrap
 brew install ssh-copy-id
+brew install tmux
 brew install tree
 brew install vbindiff
 brew install z

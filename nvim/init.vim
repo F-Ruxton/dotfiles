@@ -1,5 +1,6 @@
 "--------------------------------------------------------------------------
 
+set history=1000
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -97,6 +98,7 @@ call plug#begin(data_dir . '/plugins')
 
 source ~/.config/nvim/plugins/vim-abolish.vim
 source ~/.config/nvim/plugins/airline.vim
+source ~/.config/nvim/plugins/ansible-vim.vim
 source ~/.config/nvim/plugins/coc.vim
 source ~/.config/nvim/plugins/commentary.vim
 source ~/.config/nvim/plugins/context-commentstring.vim
@@ -152,6 +154,6 @@ set background=dark
 
 "--------------------------------------------------------------------------
 " Python
-let g:python_host_prog = '~/miniconda3/envs/nvim-2.7/bin/python'
-let g:python3_host_prog = '~/miniconda3/envs/nvim-3.10/bin/python'
+let g:python_host_prog = '/usr/local/anaconda3/envs/nvim-2.7/bin/python'
+let g:python3_host_prog = '/usr/local/anaconda3/envs/nvim-3.10/bin/python'
 
