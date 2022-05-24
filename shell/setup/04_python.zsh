@@ -7,10 +7,16 @@
 #   bashcompinit
 eval "$(register-python-argcomplete pipx)"
 
-# ipython
-alias py='python'
 alias pyc='python -c'
-alias ipy='ipython'
+
+function py() {
+  if ! command -v ipython &> /dev/null
+  then
+    python
+  else
+    ipython
+  fi
+}
 
 ## poetry
 alias p="poetry"
@@ -20,47 +26,62 @@ alias prp="poetry run python"
 
 ## conda
 alias c='conda'
-alias ca='conda activate'
 alias cdeactivate='conda deactivate'
 alias ci='conda install'
-alias ce='conda env'
-alias cre='conda env remove -n'
-alias cl='conda list'
 alias cs='conda search'
-alias cee='conda-export-env'
-alias ceep='conda-export-env-pip'
 
 alias m='mamba'
-alias ma='mamba activate'
 alias mdeactivate='mamba deactivate'
 alias mi='mamba install'
-alias mee='mamba-export-env'
+
+function pick_env() {
+  local _env=$(conda env list | fzf | awk '{ print $1 }')
+  echo "$_env"
+}
+
+function execute_with_env() {
+  local command="$1"
+  local env="$2"
+
+  if [ -z "$env" ] ; then
+    env=$(pick_env)
+  fi
+
+  eval "$command" "$env"
+}
 
 function caf() {
-  _env=$(cel | fzf | awk '{ print $1 }')
-  ca "$_env"
+  execute_with_env "conda activate" "$1"
 }
 
 function maf() {
-  _env=$(mamba env list | fzf | awk '{ print $1 }')
-  mamba activate "$_env"
+  execute_with_env "mamba activate" "$1"
 }
 
-function cel() {
-  if [ -z "$1" ] ; then
-    conda env list
-  else
-    conda env list | grep "$1" | awk -v n=1 '{print $n}'
-  fi
+function cer() {
+  execute_with_env "conda env remove -n" "$1"
+}
+
+function ceu() {
+  _file="${1:-environment.yml}"
+  echo "Updating conda environment from file $_file..."
+  conda env update -n "$CONDA_DEFAULT_ENV" -f "$_file"
+}
+
+function meu() {
+  _file="${1:-environment.yml}"
+  echo "Updating mamba environment from file $_file..."
+  mamba env update -n "$CONDA_DEFAULT_ENV" -f "$_file"
 }
 
 function cce() {
-  # create and actiate a new conda environment
+  # create and activate a new conda environment
   if [ -z "$1" ] ; then
     echo "No name given, exiting"
     return 1
   else
     _env_name="$1"
+
   fi
 
   if [ -z "$2" ] ; then
@@ -70,19 +91,29 @@ function cce() {
     _python_version="$2"
   fi
 
-  echo "Creating conda environment $env_name..."
-  conda create --name "$_env_name" python="$_python_version" "${@:3}" -y
-  echo "Activating environment $_env_name ($_python_version)..."
-  cdeactivate
-  conda activate "$_env_name"
-}
+  echo "Creating conda environment $_env_name (python=$_python_version, MAC_ARCH=$MAC_ARCH)"
 
-function ceu() {
-  _file="${1:-environment.yml}"
-  echo "Updating conda environment from file $_file..."
-  conda env update -f "$_file"
-}
+  if [ "$MAC_ARCH" = "M1" ] ; then
+    conda create --name "$_env_name" python="$_python_version" "${@:3}" -y
+  else
+    CONDA_SUBDIR=osx-64 conda create --name "$_env_name" python="$_python_version" "${@:3}" -y
+  fi
 
+  echo "Activating environment $_env_name"
+
+  if [ "$MAC_ARCH" = "M1" ] ; then
+    conda activate "$_env_name"
+  else
+    conda activate "$_env_name"
+    conda env config vars set CONDA_SUBDIR=osx-64
+    conda deactivate
+    conda activate "$_env_name"
+
+    echo "Running OS checks..."
+    python -c "import platform;print(platform.machine())"
+    echo "CONDA_SUBDIR: $CONDA_SUBDIR"
+  fi
+}
 
 function conda-nb-kernel-from-env() {
   # create a notebook kernel from a conda enironment
@@ -90,35 +121,6 @@ function conda-nb-kernel-from-env() {
   conda install ipykernel
   ipython kernel install --user --name="$2"
   conda deactivate "$1"
-}
-
-function conda-export-env() {
-  # export in conda's native format
-  env_name=$(conda info --envs | grep "\*" | awk '{print $3}' | xargs basename)
-  echo "Exporting current environment $env_name"
-  conda env export -f environment.yml
-  pip freeze
-}
-
-function mamba-export-env() {
-  # export in mamba's native format
-  env_name=$(mamba info --envs | grep "\*" | awk '{print $3}' | xargs basename)
-  echo "Exporting current environment $env_name"
-  mamba env export -f environment.yml
-}
-
-function conda-export-env-pip() {
-  # export in format compatible with pip-based installs
-  env_name=$(conda info --envs | grep "\*" | awk '{print $3}' | xargs basename)
-  echo "Exporting current environment $env_name in pip format"
-  conda install pip
-  pip freeze > requirements.txt
-}
-
-function conda-rename-env() {
-  conda create --name "$2" --clone "$1"
-  conda env remove --name "$1"
-  conda activate "$2"
 }
 
 # Jupyter
