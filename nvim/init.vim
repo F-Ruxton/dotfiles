@@ -154,6 +154,6 @@ set background=dark
 
 "--------------------------------------------------------------------------
 " Python
-let g:python_host_prog = '~/miniconda3/envs/nvim-2.7/bin/python'
-let g:python3_host_prog = '~/miniconda3/envs/nvim-3.10/bin/python'
+let g:python_host_prog = '/usr/local/anaconda3/envs/nvim-2.7/bin/python'
+let g:python3_host_prog = '/usr/local/anaconda3/envs/nvim-3.10/bin/python'
 
