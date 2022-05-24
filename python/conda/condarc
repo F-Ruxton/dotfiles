@@ -1,8 +1,11 @@
 channels:
+  - pytorch
   - pyviz
   - conda-forge
   - defaults
 
 always_yes: True
+
+channel_priority: strict
 
 env_prompt: '({default_env}) '
