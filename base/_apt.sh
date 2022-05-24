@@ -41,11 +41,13 @@ ai gh
 ai httpie
 ai imagemagick
 ai lua5.4
+ai mc
 ai pigz
 ai pv
 ai rename
 ai ripgrep
 ai rlwrap
+ai tmux
 ai tree
 ai vbindiff
 ai zopfli
