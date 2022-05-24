@@ -25,6 +25,11 @@ alias copy="xclip -selection clipboard"
 alias paste="xclip -o -selection clipboard"
 alias cat="bat"
 
+function weather() {
+  local location="${1:-london}"
+  curl "https://wttr.in/$location"
+}
+
 # Open vim with z argument
 v() {
     if [ -n "$1" ]; then
@@ -53,34 +58,9 @@ alias lS='exa -1'                 # one column, just names
 alias lt='exa --tree --level=2'   # tree
 
 alias t="task"
-alias todo="conda activate vit && vit"
+
 
 # ==============================================================================
-# GluoNNet
+# Sylvera
+source "/Users/freddieruxton/Documents/projects/sylvera/bash_utils/entrypoint.sh"
 
-# GN_SSH_USERNAME="fruxton"
-# GN_SSH_IP="81.28.198.16"
-# GN_SSH_DETAILS="${GN_SSH_USERNAME}@${GN_SSH_IP}"
-# alias gnssh="sshpass -f ~/Documents/Credentials/GN/GNServer"
-# alias gnssh-sh="gnssh ssh ${GN_SSH_DETAILS}"
-# alias gnssh-jl="gnssh ssh -NL 8889:localhost:8889 ${GN_SSH_DETAILS}"
-
-# function gnssh-cp-from() {
-#   if [ -z "$2" ] ; then
-#     gnssh scp "$GN_SSH_DETAILS:$1" .
-#   else ;
-#     gnssh scp "$GN_SSH_DETAILS:$1" "$2"
-#   fi
-# }
-# function gnssh-cp-to() {
-#   if [ -z "$1" ] ; then
-#     echo "No first argument given"
-#   elif [ -z "$2" ] ; then
-#     gnssh scp "$1" "$GN_SSH_DETAILS:/mnt/gluoNNet-02/data/home/fruxton"
-#   else ;
-#     gnssh scp "$1" "$GN_SSH_DETAILS:/mnt/gluoNNet-02/data/home/fruxton/$2"
-#   fi
-# }
-
-# ==============================================================================
-# Sylvera
