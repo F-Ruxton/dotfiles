@@ -35,6 +35,7 @@ fi
     zplug "marlonrichert/zsh-autocomplete"
     zplug "djui/alias-tips"
     zplug "felixr/docker-zsh-completion"
+    zplug "jeffreytse/zsh-vi-mode"
 
     # Theme
     zplug romkatv/powerlevel10k, as:theme, depth:1
