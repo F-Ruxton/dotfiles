@@ -64,3 +64,8 @@ alias t="task"
 # Sylvera
 source "/Users/freddieruxton/Documents/projects/sylvera/bash_utils/entrypoint.sh"
 
+alias tt="sync_to_tower"
+alias ft="sync_from_tower"
+alias rt="run_on_tower"
+alias ljt3="list_jobs_on_tower 3 freddie"
+alias ljt4="list_jobs_on_tower 4 freddie"

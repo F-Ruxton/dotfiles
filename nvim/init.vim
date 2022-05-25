@@ -111,6 +111,8 @@ source ~/.config/nvim/plugins/floaterm.vim
 source ~/.config/nvim/plugins/fugitive.vim
 source ~/.config/nvim/plugins/fzf.vim
 source ~/.config/nvim/plugins/gruvbox.vim
+source ~/.config/nvim/plugins/kanagawa.vim
+source ~/.config/nvim/plugins/tokyonight.vim
 source ~/.config/nvim/plugins/heritage.vim
 source ~/.config/nvim/plugins/indent-line.vim
 source ~/.config/nvim/plugins/lastplace.vim
@@ -124,6 +126,7 @@ source ~/.config/nvim/plugins/projectionist.vim
 source ~/.config/nvim/plugins/quickscope.vim
 source ~/.config/nvim/plugins/repeat.vim
 source ~/.config/nvim/plugins/rooter.vim
+source ~/.config/nvim/plugins/rope.vim
 source ~/.config/nvim/plugins/sayonara.vim
 source ~/.config/nvim/plugins/smooth-scroll.vim
 source ~/.config/nvim/plugins/splitjoin.vim
@@ -141,6 +144,8 @@ source ~/.config/nvim/plugins/vim-devicons.vim
 call plug#end()
 doautocmd User PlugLoaded
 
+" colorscheme tokyonight
+colorscheme kanagawa
 "--------------------------------------------------------------------------
 " Miscellaneous
 "--------------------------------------------------------------------------
@@ -157,3 +162,5 @@ set background=dark
 let g:python_host_prog = '/usr/local/anaconda3/envs/nvim-2.7/bin/python'
 let g:python3_host_prog = '/usr/local/anaconda3/envs/nvim-3.10/bin/python'
 
+" Show ruler one character past black's 88
+autocmd BufRead,BufNewFile *.py set colorcolumn=89
