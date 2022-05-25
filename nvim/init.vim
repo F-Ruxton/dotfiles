@@ -124,6 +124,7 @@ source ~/.config/nvim/plugins/projectionist.vim
 source ~/.config/nvim/plugins/quickscope.vim
 source ~/.config/nvim/plugins/repeat.vim
 source ~/.config/nvim/plugins/rooter.vim
+source ~/.config/nvim/plugins/rope.vim
 source ~/.config/nvim/plugins/sayonara.vim
 source ~/.config/nvim/plugins/smooth-scroll.vim
 source ~/.config/nvim/plugins/splitjoin.vim
