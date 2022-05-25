@@ -157,3 +157,5 @@ set background=dark
 let g:python_host_prog = '/usr/local/anaconda3/envs/nvim-2.7/bin/python'
 let g:python3_host_prog = '/usr/local/anaconda3/envs/nvim-3.10/bin/python'
 
+" Show ruler one character past black's 88
+autocmd BufRead,BufNewFile *.py set colorcolumn=89
