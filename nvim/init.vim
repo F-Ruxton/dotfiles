@@ -111,6 +111,8 @@ source ~/.config/nvim/plugins/floaterm.vim
 source ~/.config/nvim/plugins/fugitive.vim
 source ~/.config/nvim/plugins/fzf.vim
 source ~/.config/nvim/plugins/gruvbox.vim
+source ~/.config/nvim/plugins/kanagawa.vim
+source ~/.config/nvim/plugins/tokyonight.vim
 source ~/.config/nvim/plugins/heritage.vim
 source ~/.config/nvim/plugins/indent-line.vim
 source ~/.config/nvim/plugins/lastplace.vim
@@ -142,6 +144,8 @@ source ~/.config/nvim/plugins/vim-devicons.vim
 call plug#end()
 doautocmd User PlugLoaded
 
+" colorscheme tokyonight
+colorscheme kanagawa
 "--------------------------------------------------------------------------
 " Miscellaneous
 "--------------------------------------------------------------------------
