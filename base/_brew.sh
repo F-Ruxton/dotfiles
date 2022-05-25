@@ -54,6 +54,8 @@ brew install git-delta
 brew install httpie
 brew install imagemagick
 brew install lua
+brew install jesseduffield/lazydocker/lazydocker
+brew install jesseduffield/lazygit/lazygit
 brew install midnight-commander
 brew install pigz
 brew install pv
