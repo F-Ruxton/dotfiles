@@ -18,6 +18,7 @@
     ~/.taskrc: taskwarrior/taskrc
     ~/.taskopenrc: taskwarrior/taskopenrc
     ~/.vit: taskwarrior/vit
+    ~/.zsh_plugins.txt: shell/zsh_plugins.txt
     ~/.zshrc: shell/zshrc
     ~/.p10k.zsh: shell/p10k.zsh
 
