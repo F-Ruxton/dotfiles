@@ -7,6 +7,11 @@
 #   bashcompinit
 eval "$(register-python-argcomplete pipx)"
 
+# export PATH="$HOME/.poetry/bin:$PATH"
+
+# for pipx
+export PATH="$PATH:/Users/freddieruxton/.local/bin"
+
 alias pyc='python -c'
 
 function py() {
@@ -137,4 +142,3 @@ alias jl='jupyter lab'
 #   eval "$(pyenv init -)"
 # fi
 
-# export PATH="$HOME/.poetry/bin:$PATH"
