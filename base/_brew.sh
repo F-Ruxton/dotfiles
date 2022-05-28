@@ -69,6 +69,10 @@ brew install vbindiff
 brew install z
 brew install zopfli
 
+# password managers
+brew install lastpass-cli
+brew install --cask 1password/tap/1password-cli
+
 # install pipx: in apt version must install using pip
 brew install pipx
 pipx ensurepath
