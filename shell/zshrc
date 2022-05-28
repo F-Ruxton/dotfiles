@@ -6,55 +6,40 @@ else
   export MAC_ARCH="Intel"
 fi
 
+autoload -Uz compinit
+compinit
+
+autoload -U bashcompinit
+bashcompinit
+
+# Enable bash completion
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
 # Plugins {{{
 # ==============================================================================
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-    # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-    # Initialization code that may require console input (password prompts, [y/n]
-    # confirmations, etc.) must go above this block; everything else may go below.
-    if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-        source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-    fi
 
-    export ZPLUG_HOME="$HOME/.zplug"
-    source $ZPLUG_HOME/init.zsh
+# clone antidote if necessary
+[[ -e ~/.antidote ]] || git clone https://github.com/mattmc3/antidote.git ~/.antidote
 
-    zplug "plugins/common-aliases", from:oh-my-zsh
-    zplug "plugins/cp",             from:oh-my-zsh
-    zplug "plugins/docker",         from:oh-my-zsh
-    zplug "plugins/docker-compose", from:oh-my-zsh
-    zplug "plugins/fzf",            from:oh-my-zsh
-    zplug "plugins/git",            from:oh-my-zsh
-    zplug "plugins/gitflow",       from:oh-my-zsh
-    zplug "plugins/httpie",         from:oh-my-zsh
-    zplug "plugins/z",              from:oh-my-zsh
-    zplug "zsh-users/zsh-completions",              defer:0
-    zplug "zsh-users/zsh-syntax-highlighting",      defer:3, on:"zsh-users/zsh-completions"
-    zplug "zsh-users/zsh-history-substring-search", defer:3, on:"zsh-users/zsh-syntax-highlighting"
-    zplug "marlonrichert/zsh-autocomplete"
-    zplug "djui/alias-tips"
-    zplug "felixr/docker-zsh-completion"
-    zplug "jeffreytse/zsh-vi-mode"
+# source antidote
+. ~/.antidote/antidote.zsh
 
-    # Theme
-    zplug romkatv/powerlevel10k, as:theme, depth:1
+# generate and source plugins from ~/.zsh_plugins.txt
+antidote load
 
-    # Install plugins if there are plugins that have not been installed
-    if ! zplug check --verbose; then
-        printf "Install? [y/N]: "
-        if read -q; then
-            echo; zplug install
-        fi
-    fi
+autoload -Uz promptinit && promptinit && prompt powerlevel10k
 
-    zplug load # --verbose
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-    # Enable bash completion
-    #[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
-
-    autoload -U bashcompinit
-    bashcompinit
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # }}}
 
 # Load Configuration, Aliases and Functions by Topic {{{
@@ -98,11 +83,12 @@ unset __conda_path
 unset __conda_setup
 # <<< conda initialize <<<
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# <<< conda initialize <<<
 
+# iterm shell integration
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
 
 # }}}
 
@@ -110,6 +96,3 @@ export PATH="$HOME/.poetry/bin:$PATH"
 
 # Created by `pipx` on 2022-03-12 21:19:05
 export PATH="$PATH:/Users/freddieruxton/.local/bin"
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
-
