@@ -2,6 +2,10 @@
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
+run_pre="${1:-true}"
+run_main="${2:-true}"
+run_post="${3:-true}"
+
 unameOut="$(uname -s)"
 case "${unameOut}" in
     Linux*)  machine=Linux;;
@@ -17,15 +21,25 @@ fi
 
 echo "Machine OS = ${machine}"
 
-. "$SCRIPT_DIR/_common.sh" "$machine"
+if [ "$run_pre" -eq "true" ] ; then
+    echo "Running common_pre.sh"
+    . "$SCRIPT_DIR/_common_pre.sh" "$machine"
+fi
 
-case "$machine" in
-    Mac) script=_brew.sh;;
-    Linux) script=_apt.sh;;
-    *)
-esac
+if [ "$run_pre" -eq "true" ] ; then
+    case "$machine" in
+        Mac) script=_brew.sh;;
+        Linux) script=_apt.sh;;
+        *)
+    esac
+    echo "Running $script"
+    . "$SCRIPT_DIR/$script"
+fi
 
-. "$SCRIPT_DIR/$script"
+if [ "$run_pre" -eq "true" ] ; then
+    echo "Running common_post.sh"
+    . "$SCRIPT_DIR/_common_post.sh" "$SCRIPT_DIR"
+fi
 
 echo
 echo "Finished"
