@@ -20,7 +20,7 @@ function  brew-update-all() {
 # General
 
 alias lkm=". ~/.config/xkb/.xprofile"
-alias vim="nvim"
+alias v="lvim"
 alias copy="xclip -selection clipboard"
 alias paste="xclip -o -selection clipboard"
 alias cat="bat"
@@ -28,15 +28,6 @@ alias cat="bat"
 function weather() {
   local location="${1:-london}"
   curl "https://wttr.in/$location"
-}
-
-# Open vim with z argument
-v() {
-    if [ -n "$1" ]; then
-        z $1
-    fi
-
-    vim .
 }
 
 # git flag currently disabled in ubuntu https://github.com/ogham/exa/issues/761
@@ -67,5 +58,5 @@ source "/Users/freddieruxton/Documents/projects/sylvera/bash_utils/entrypoint.sh
 alias tt="sync_to_tower"
 alias ft="sync_from_tower"
 alias rt="run_on_tower"
-alias ljt3="list_jobs_on_tower 3 freddie"
-alias ljt4="list_jobs_on_tower 4 freddie"
+alias l3="list_jobs_on_tower 3 freddie"
+alias l4="list_jobs_on_tower 4 freddie"
