@@ -33,8 +33,7 @@ vim.opt.splitright = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.confirm = true
 vim.opt.exrc = true
-vim.opt.backup = true
-vim.opt.backupdir = "~/.local/share/nvim/backup//"
+vim.opt.backup = false
 vim.opt.updatetime = 300 -- Reduce time for highlighting other references
 vim.opt.redrawtime = 10000 -- Allow more time for loading syntax on large files
 
