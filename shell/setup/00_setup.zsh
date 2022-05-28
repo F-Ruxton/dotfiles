@@ -26,7 +26,7 @@ zstyle ':autocomplete:*' fzf-completion yes
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='vim'
 else
-    export EDITOR='nvim'
+    export EDITOR='lvim'
 fi
 
 # Disable tab-completion bell
