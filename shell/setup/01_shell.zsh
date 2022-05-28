@@ -19,6 +19,8 @@ function  brew-update-all() {
 # ==============================================================================
 # General
 
+alias falias="alias | fzf"
+
 alias lkm=". ~/.config/xkb/.xprofile"
 alias v="lvim"
 alias copy="xclip -selection clipboard"
