@@ -1,1 +1,0 @@
-Plug 'python-rope/ropevim'
