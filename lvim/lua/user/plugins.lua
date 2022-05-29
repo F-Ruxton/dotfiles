@@ -39,6 +39,13 @@ lvim.plugins = {
     { "sickill/vim-pasta" },
     { "unblevable/quick-scope", qs_highlight_on_keys = { "f", "F", "t", "T" } },
     { "vim-test/vim-test" },
+    {
+        "ThePrimeagen/refactoring.nvim",
+        requires = {
+            { "nvim-lua/plenary.nvim" },
+            { "nvim-treesitter/nvim-treesitter" }
+        }
+    },
     { "wellle/targets.vim" },
     {
         "phaazon/hop.nvim",
