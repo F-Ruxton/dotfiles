@@ -67,6 +67,8 @@ if [ "$MAC_ARCH" = "Intel" ] && [ -d "/usr/local/anaconda3" ] ; then
     _conda_path="/usr/local/anaconda3"
 elif [ -d "$HOME/opt/anaconda3" ] ; then
     _conda_path="$HOME/opt/anaconda3"
+elif [ -d "$HOME/miniconda3" ] ; then
+    _conda_path="$HOME/miniconda3"
 fi
 
 if [ -z "$_conda_path" ] ; then
