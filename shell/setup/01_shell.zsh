@@ -52,6 +52,8 @@ alias lt='exa --tree --level=2'   # tree
 
 alias t="task"
 
+alias lg="lazygit"
+alias ldc="lazydocker"
 
 # ==============================================================================
 # Sylvera
