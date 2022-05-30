@@ -57,7 +57,10 @@ alias ldc="lazydocker"
 
 # ==============================================================================
 # Sylvera
-source "/Users/freddieruxton/Documents/projects/sylvera/bash_utils/entrypoint.sh"
+bash_utils_entrypoint="/Users/freddieruxton/Documents/projects/sylvera/bash_utils/entrypoint.sh"
+if [ -f "$bash_utils_entrypoint" ] ; then
+    source "$bash_utils_entrypoint"
+fi
 
 alias tt="sync_to_tower"
 alias ft="sync_from_tower"
