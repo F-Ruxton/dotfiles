@@ -5,21 +5,9 @@ lvim.plugins = {
     -- { "heritage" },
     -- { "visual-star-search" }
     -- { "puremourning/vimspector" },
-    -- {
-    --     "mfussenegger/nvim-dap",
-    --     -- event = "BufWinEnter",
-    --     config = function()
-    --         require("lvim.core.dap").setup()
-    --     end,
-    --     disable = not lvim.builtin.dap.active,
-    -- },
-    -- {
-    --     "Pocco81/dap-buddy.nvim",
-    --     branch = "dev",
-    --     -- event = "BufWinEnter",
-    --     -- event = "BufRead",
-    --     disable = not lvim.builtin.dap.active,
-    -- },
+    { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } },
+    { "theHamsta/nvim-dap-virtual-text" },
+    { "mfussenegger/nvim-dap-python" },
     { "editorconfig/editorconfig-vim" },
     { "folke/trouble.nvim", cmd = "TroubleToggle" },
     { "metakirby5/codi.vim", cmd = "Codi" },
