@@ -39,6 +39,7 @@ lvim.plugins = {
     { "sickill/vim-pasta" },
     { "unblevable/quick-scope", qs_highlight_on_keys = { "f", "F", "t", "T" } },
     { "vim-test/vim-test" },
+    { "nvim-treesitter/nvim-treesitter-textobjects" },
     {
         "ThePrimeagen/refactoring.nvim",
         requires = {
