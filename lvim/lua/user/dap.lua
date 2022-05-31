@@ -1,3 +1,6 @@
+lvim.keys.visual_mode["<M-k>"] = "<Cmd>lua require('dapui').eval()<CR>"
+
+
 local status_ok, dap = pcall(require, "dap")
 if not status_ok then
     return
