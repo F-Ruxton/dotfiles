@@ -28,6 +28,7 @@ lvim.plugins = {
     { "unblevable/quick-scope", qs_highlight_on_keys = { "f", "F", "t", "T" } },
     { "vim-test/vim-test" },
     { "nvim-treesitter/nvim-treesitter-textobjects" },
+    { "ThePrimeagen/harpoon" },
     {
         "ThePrimeagen/refactoring.nvim",
         requires = {
