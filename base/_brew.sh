@@ -58,10 +58,12 @@ brew install jesseduffield/lazydocker/lazydocker
 brew install jesseduffield/lazygit/lazygit
 brew install midnight-commander
 brew install pigz
+brew install procs
 brew install pv
 brew install rename
 brew install ripgrep
 brew install rlwrap
+brew install sd
 brew install ssh-copy-id
 brew install tmux
 brew install tree
