@@ -20,6 +20,7 @@ function  brew-update-all() {
 # General
 
 alias falias="alias | fzf"
+alias regex101="open https://regex101.com/"
 
 alias lkm=". ~/.config/xkb/.xprofile"
 alias v="lvim"
