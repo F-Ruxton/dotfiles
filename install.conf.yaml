@@ -2,6 +2,9 @@
     link:
       relink: true
 
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+
 - clean: ['~']
 
 - link:
@@ -16,10 +19,12 @@
     ~/.task: taskwarrior/task
     ~/.taskrc: taskwarrior/taskrc
     ~/.taskopenrc: taskwarrior/taskopenrc
+    ~/.tmux: tmux
+    ~/.tmux.conf: tmux/tmux.conf
     ~/.vit: taskwarrior/vit
     ~/.zsh_plugins.txt: shell/zsh_plugins.txt
     ~/.zshrc: shell/zshrc
     ~/.p10k.zsh: shell/p10k.zsh
 
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
+  - [bash ~/.tmux/install_plugins.sh]
