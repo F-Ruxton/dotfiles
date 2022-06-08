@@ -5,6 +5,7 @@ lvim.plugins = {
     -- { "heritage" },
     -- { "visual-star-search" }
     -- { "puremourning/vimspector" },
+    { "folke/tokyonight.nvim" },
     { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } },
     { "theHamsta/nvim-dap-virtual-text" },
     { "mfussenegger/nvim-dap-python" },
