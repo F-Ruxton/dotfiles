@@ -1,7 +1,11 @@
 -- general lvim
 lvim.log.level = "warn"
 lvim.format_on_save = true
+
 lvim.colorscheme = "kanagawa"
+-- vim.g.tokyonight_style = "day"
+-- lvim.colorscheme = "tokyonight"
+
 lvim.lsp.diagnostics.virtual_text = false
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
