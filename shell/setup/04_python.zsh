@@ -79,7 +79,7 @@ function meu() {
   mamba env update -n "$CONDA_DEFAULT_ENV" -f "$_file"
 }
 
-function cce() {
+function cec() {
   # create and activate a new conda environment
   if [ -z "$1" ] ; then
     echo "No name given, exiting"
