@@ -126,3 +126,34 @@ table.insert(
         }
     }
 )
+
+-- local conda_venv_path = function()
+--   local conda_prefix = os.getenv('CONDA_PREFIX')
+
+--   if conda_prefix then
+--     local handle = io.popen("conda info -base")
+
+--     if handle then
+--       local conda_base = handle:read("*a")
+--       handle:close()
+--       conda_base = conda_base:gsub("[\n\r]", "")
+
+--       if conda_prefix ~= conda_base then
+--         return conda_prefix
+--       end
+--     end
+--     return nil
+--   end
+-- end
+
+-- local get_python_path = function()
+--   local venv_path = os.getenv('VIRTUAL_ENV') or os.getenv('CONDA_PREFIX')
+
+--   if venv_path then
+--     if is_windows() then
+--       return venv_path .. '\\Scripts\\python.exe'
+--     end
+--     return venv_path .. '/bin/python'
+--   end
+--   return nil
+-- end
