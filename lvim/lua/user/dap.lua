@@ -1,12 +1,27 @@
-lvim.keys.visual_mode["<M-k>"] = "<Cmd>lua require('dapui').eval()<CR>"
-
-
 local status_ok, dap = pcall(require, "dap")
 if not status_ok then
     return
 end
 
-require("nvim-dap-virtual-text").setup {
+local status_ok, dapui = pcall(require, "dapui")
+if not status_ok then
+    return
+end
+
+local status_ok, dappython = pcall(require, "dap-python")
+if not status_ok then
+    return
+end
+
+local status_ok, dapvt = pcall(require, "nvim-dap-virtual-text")
+if not status_ok then
+    return
+end
+
+-- ================================================================================
+-- dap-virtual-text
+
+dapvt.setup {
     enabled = true, -- enable this plugin (the default)
     enabled_commands = true, -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
     highlight_changed_variables = true, -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
@@ -24,7 +39,10 @@ require("nvim-dap-virtual-text").setup {
     -- e.g. 80 to position at column 80, see `:h nvim_buf_set_extmark()`
 }
 
-require("dapui").setup({
+-- ================================================================================
+-- dap-ui
+
+dapui.setup({
     icons = { expanded = "▾", collapsed = "▸" },
     mappings = {
         -- Use a table to apply multiple mappings
@@ -72,11 +90,28 @@ require("dapui").setup({
     }
 })
 
-require("dap-python").setup("/usr/local/anaconda3/envs/debugpy/bin/python")
-require("dap-python").test_runner = "pytest"
+dap.listeners.after.event_initialized["dapui_config"] = function()
+    dapui.open()
+end
+dap.listeners.before.event_terminated["dapui_config"] = function()
+    dapui.close()
+end
+dap.listeners.before.event_exited["dapui_config"] = function()
+    dapui.close()
+end
+
+lvim.keys.normal_mode["<C-v>"] = ":lua require('dapui').eval(function () vim.fn.expand('<cexpr>') end)<CR>"
+lvim.keys.visual_mode["<C-v>"] = ":lua require('dapui').eval(function () vim.fn.expand('<cexpr>') end)<CR>"
+
+-- ================================================================================
+-- dap-python
+
+dappython.setup("/usr/local/anaconda3/envs/debugpy/bin/python")
+dappython.test_runner = "pytest"
 
 dap.configurations.python = dap.configurations.python or {}
-table.insert(dap.configurations.python,
+table.insert(
+    dap.configurations.python,
     {
         name = "Attach Remote (Custom)",
         type = "python",
