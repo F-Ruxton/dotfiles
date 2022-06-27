@@ -117,6 +117,7 @@ table.insert(
         request = "attach",
         port = 20103,
         host = "localhost",
+        justMyCode = false,
         pathMappings = {
             {
                 localRoot = "${workspaceFolder}",
