@@ -1,10 +1,37 @@
 lvim.plugins = {
+    -- tried, doesn't add that much
+    -- { "unblevable/quick-scope", qs_highlight_on_keys = { "f", "F", "t", "T" } },
+
+    -- replaced by lazygit
+    -- {
+    --     "tpope/vim-fugitive",
+    --     cmd = {
+    --         "G",
+    --         "Git",
+    --         "Gdiffsplit",
+    --         "Gvdiffsplit",
+    --         "Gread",
+    --         "Gwrite",
+    --         "Ggrep",
+    --         "GMove",
+    --         "GDelete",
+    --         "GBrowse",
+    --         "GRemove",
+    --         "GRename",
+    --         "Glgrep",
+    --         "Gedit"
+    --     },
+    --     ft = { "fugitive" }
+    -- },
+
+    -- not sure about these
     -- { "junegunn/vim-peekaboo" },
     -- { "junegunn/splitjoin" },
     -- { "projectionist" },
     -- { "heritage" },
     -- { "visual-star-search" }
     -- { "puremourning/vimspector" },
+
     { "folke/tokyonight.nvim" },
     { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } },
     { "theHamsta/nvim-dap-virtual-text" },
@@ -26,8 +53,9 @@ lvim.plugins = {
     { "mg979/vim-visual-multi" },
     { "python-rope/ropevim" },
     { "sickill/vim-pasta" },
-    { "unblevable/quick-scope", qs_highlight_on_keys = { "f", "F", "t", "T" } },
     { "vim-test/vim-test" },
+    -- alternative
+    -- { "nvim-neotest/neotest" },
     { "nvim-treesitter/nvim-treesitter-textobjects" },
     { "ThePrimeagen/harpoon" },
     {
@@ -97,26 +125,6 @@ lvim.plugins = {
                 options = { "buffers", "curdir", "tabpages", "winsize" },
             }
         end,
-    },
-    {
-        "tpope/vim-fugitive",
-        cmd = {
-            "G",
-            "Git",
-            "Gdiffsplit",
-            "Gvdiffsplit",
-            "Gread",
-            "Gwrite",
-            "Ggrep",
-            "GMove",
-            "GDelete",
-            "GBrowse",
-            "GRemove",
-            "GRename",
-            "Glgrep",
-            "Gedit"
-        },
-        ft = { "fugitive" }
     },
     {
         "ahmedkhalf/lsp-rooter.nvim",
