@@ -58,13 +58,37 @@ alias ldc="lazydocker"
 
 # ==============================================================================
 # Sylvera
-bash_utils_entrypoint="/Users/freddieruxton/Documents/projects/sylvera/bash_utils/entrypoint.sh"
-if [ -f "$bash_utils_entrypoint" ] ; then
-    source "$bash_utils_entrypoint"
+PROJECTS_DIR="$HOME/Documents/projects"
+SYL_PROJECTS_DIR="$HOME/Documents/projects/sylvera"
+
+alias tms="python $HOME/dotfiles/tmux/sessions/dev.py"
+
+function ttm() {
+    tower="$1"
+    session="${2:-$tower}"
+
+    if [[ -z "$tower" ]] ; then
+        echo "Must give tower name"
+    else
+        ssh "$tower" -t tmux new -A -s "$session"
+    fi
+}
+
+if [ -f "$SYL_PROJECTS_DIR/bash_utils/entrypoint.sh" ] ; then
+    source "$SYL_PROJECTS_DIR/bash_utils/entrypoint.sh"
 fi
 
 alias tt="sync_to_tower"
 alias ft="sync_from_tower"
 alias rt="run_on_tower"
-alias l3="list_jobs_on_tower 3 freddie"
-alias l4="list_jobs_on_tower 4 freddie"
+
+function lj() {
+    list_jobs_on_tower $1 freddie
+}
+
+function lja() {
+    echo 1: $( list_jobs_on_tower 1 freddie )
+    echo 2: $( list_jobs_on_tower 2 freddie )
+    echo 3: $( list_jobs_on_tower 3 freddie )
+    echo 4: $( list_jobs_on_tower 4 freddie )
+}
