@@ -1,0 +1,34 @@
+{
+  "prod": {
+    "base_dir": "sylvera_ml_production",
+    "env": "projects_pipeline",
+    "tower": "t3",
+    "tower_session": "prod"
+  },
+  "train": {
+    "base_dir": "sylvera_training",
+    "env": "training",
+    "tower": "t3",
+    "tower_session": "train"
+  },
+  "gee": {
+    "base_dir": "gee_connector",
+    "env": "gee_connector",
+    "tower": "t3",
+    "tower_session": "gee"
+  },
+  "sylvera_utils": {
+    "base_dir": "sylvera_utils",
+    "env": "sylvera_utils",
+    "tower": "t3",
+    "tower_session": "sylvera_utils"
+  },
+  "bash": {
+    "base_dir": "bash_utils",
+    "env": "bash_utils"
+  },
+  "compute": {
+    "base_dir": "compute_infrastructure",
+    "env": "compute_infra"
+  }
+}
