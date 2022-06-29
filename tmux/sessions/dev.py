@@ -123,7 +123,7 @@ def main() -> None:
         cmd(["tmux", "new-window", "-t", f"{session}:3", "-n", "fswatch"])
         send_keys_cmd(
             "fswatch",
-            ["sync_to_tower", tower_index, "-wgyK", "freddie", ".", base_dir.stem],
+            ["sync_to_tower", "-wgyK", tower_index, "freddie", ".", base_dir.stem],
             False,
         )
 
