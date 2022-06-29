@@ -1,36 +1,10 @@
 lvim.plugins = {
-    -- tried, doesn't add that much
-    -- { "unblevable/quick-scope", qs_highlight_on_keys = { "f", "F", "t", "T" } },
-
-    -- replaced by lazygit
-    -- {
-    --     "tpope/vim-fugitive",
-    --     cmd = {
-    --         "G",
-    --         "Git",
-    --         "Gdiffsplit",
-    --         "Gvdiffsplit",
-    --         "Gread",
-    --         "Gwrite",
-    --         "Ggrep",
-    --         "GMove",
-    --         "GDelete",
-    --         "GBrowse",
-    --         "GRemove",
-    --         "GRename",
-    --         "Glgrep",
-    --         "Gedit"
-    --     },
-    --     ft = { "fugitive" }
-    -- },
-
     -- not sure about these
     -- { "junegunn/vim-peekaboo" },
     -- { "junegunn/splitjoin" },
     -- { "projectionist" },
     -- { "heritage" },
     -- { "visual-star-search" }
-    -- { "puremourning/vimspector" },
 
     { "folke/tokyonight.nvim" },
     { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } },
