@@ -28,7 +28,7 @@
     "env": "bash_utils"
   },
   "compute": {
-    "base_dir": "compute_infrastructure",
+    "base_dir": "compute-infrastructure",
     "env": "compute_infra"
   }
 }
