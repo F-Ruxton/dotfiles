@@ -63,6 +63,17 @@ if [ -f "$SYL_PROJECTS_DIR/bash_utils/entrypoint.sh" ] ; then
     source "$SYL_PROJECTS_DIR/bash_utils/entrypoint.sh"
 fi
 
+function sync_bash_aliases() {
+  echo "Copying bash_aliases to user account"
+  for i in {1..4} ; do scp $HOME/dotfiles/shell/bash_aliases.sh "t$i":/home/freddie/.bash_aliases ; done
+
+  echo "Copying bash_aliases to admin account"
+  for i in {1..4} ; do scp $HOME/dotfiles/shell/bash_aliases.sh "t$i-ansible":/home/ansible/.bash_aliases ; done
+}
+function sync_tmux_config() {
+  echo "Copying tmux config to user account"
+  for i in {1..4} ; do scp -r $HOME/.tmux "t$i":/home/freddie/.tmux && scp .tmux.conf "t$i":/home/freddie/.tmux.conf ; done
+}
 alias tt="sync_to_tower"
 alias ft="sync_from_tower"
 alias rt="run_on_tower"
