@@ -12,16 +12,9 @@ eval "$(register-python-argcomplete pipx)"
 # for pipx
 export PATH="$PATH:/Users/freddieruxton/.local/bin"
 
-alias pyc='python -c'
-
-function py() {
-  if ! command -v ipython &> /dev/null
-  then
-    python
-  else
-    ipython
-  fi
-}
+alias py="python"
+alias ipy="ipython"
+alias pyc="python -c"
 
 ## poetry
 alias p="poetry"
@@ -29,19 +22,20 @@ alias pa="poetry add"
 alias pad="poetry add --dev"
 alias prp="poetry run python"
 
-## conda
-alias c='conda'
-alias cdeactivate='conda deactivate'
-alias ci='conda install'
-alias cs='conda search'
+# conda
+alias c="conda"
+alias cdeactivate="conda deactivate"
+alias ci="conda install"
+alias cs="conda search"
 
-alias m='mamba'
-alias mdeactivate='mamba deactivate'
-alias mi='mamba install'
+alias m="mamba"
+alias mdeactivate="mamba deactivate"
+alias mi="mamba install"
 
 function pick_env() {
-  local _env=$(conda env list | fzf | awk '{ print $1 }')
-  echo "$_env"
+  local env
+  env=$(conda env list | fzf | awk '{ print $1 }')
+  echo "$env"
 }
 
 function execute_with_env() {
@@ -79,29 +73,44 @@ function meu() {
   mamba env update -n "$CONDA_DEFAULT_ENV" -f "$_file"
 }
 
+
 function cec() {
+  local env_name
+  local python_version
+  local env_file
   # create and activate a new conda environment
   if [ -z "$1" ] ; then
     echo "No name given, exiting"
     return 1
+  elif [ "$1" = "-f" ] && [ -n "$2" ] ; then
+    env_file="$2"
   else
-    _env_name="$1"
-
+    env_name="$1"
   fi
 
-  if [ -z "$2" ] ; then
+  if [ -z "$env_file" ] && [ -z "$2" ] ; then
     echo "No python version given, exiting"
     return 1
   else
-    _python_version="$2"
+    python_version="$2"
   fi
 
-  echo "Creating conda environment $_env_name (python=$_python_version, MAC_ARCH=$MAC_ARCH)"
-
   if [ "$MAC_ARCH" = "M1" ] ; then
-    conda create --name "$_env_name" python="$_python_version" "${@:3}" -y
+    if [ -n "$env_file" ] ; then
+      echo "Creating conda environment from file: $env_file"
+      conda env create -f "$env_file" "${@:3}"
+    else
+      echo "Creating conda environment $env_name (python=$python_version)"
+      conda create --name "$env_name" python="$python_version" "${@:3}" -y
+    fi
   else
-    CONDA_SUBDIR=osx-64 conda create --name "$_env_name" python="$_python_version" "${@:3}" -y
+    if [ -n "$env_file" ] ; then
+      echo "Creating conda environment from file: $env_file"
+      CONDA_SUBDIR=osx-64 conda env create -f "$env_file" "${@:3}"
+    else
+      echo "Creating conda environment $env_name (python=$python_version)"
+      CONDA_SUBDIR=osx-64 conda create --name "$env_name" python="$python_version" "${@:3}" -y
+    fi
   fi
 
   echo "Activating environment $_env_name"
