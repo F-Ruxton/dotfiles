@@ -51,8 +51,6 @@ alias ls='exa'                # ls
 alias lS='exa -1'                 # one column, just names
 alias lt='exa --tree --level=2'   # tree
 
-alias t="task"
-
 alias lg="lazygit"
 alias ldc="lazydocker"
 
@@ -60,19 +58,6 @@ alias ldc="lazydocker"
 # Sylvera
 PROJECTS_DIR="$HOME/Documents/projects"
 SYL_PROJECTS_DIR="$HOME/Documents/projects/sylvera"
-
-alias tms="python $HOME/dotfiles/tmux/sessions/dev.py"
-
-function ttm() {
-    tower="$1"
-    session="${2:-$tower}"
-
-    if [[ -z "$tower" ]] ; then
-        echo "Must give tower name"
-    else
-        ssh "$tower" -t tmux new -A -s "$session"
-    fi
-}
 
 if [ -f "$SYL_PROJECTS_DIR/bash_utils/entrypoint.sh" ] ; then
     source "$SYL_PROJECTS_DIR/bash_utils/entrypoint.sh"

@@ -46,13 +46,14 @@ autoload -Uz promptinit && promptinit && prompt powerlevel10k
 # ==============================================================================
      source $HOME/dotfiles/shell/setup/00_setup.zsh;
      source $HOME/dotfiles/shell/setup/01_shell.zsh;
-     source $HOME/dotfiles/shell/setup/02_git.zsh;
-     source $HOME/dotfiles/shell/setup/03_docker.zsh;
-     source $HOME/dotfiles/shell/setup/04_python.zsh;
-     # source $HOME/dotfiles/shell/setup/05_ruby.zsh;
-     # source $HOME/dotfiles/shell/setup/06_javascript.zsh;
-     # source $HOME/dotfiles/shell/setup/07_scala.zsh;
+     source $HOME/dotfiles/shell/setup/02_tmux.zsh;
+     source $HOME/dotfiles/shell/setup/03_git.zsh;
+     source $HOME/dotfiles/shell/setup/04_docker.zsh;
+     source $HOME/dotfiles/shell/setup/05_python.zsh;
+     # source $HOME/dotfiles/shell/setup/06_ruby.zsh;
+     # source $HOME/dotfiles/shell/setup/07_javascript.zsh;
      # source $HOME/dotfiles/shell/setup/08_aws.zsh;
+     # source $HOME/dotfiles/shell/setup/09_scala.zsh;
 # }}}
 
 # Shell Setup {{{
