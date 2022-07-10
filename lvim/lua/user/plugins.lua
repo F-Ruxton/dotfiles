@@ -27,6 +27,7 @@ lvim.plugins = {
     { "mg979/vim-visual-multi" },
     { "python-rope/ropevim" },
     { "sickill/vim-pasta" },
+    -- { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' },
     { "vim-test/vim-test" },
     -- alternative
     -- { "nvim-neotest/neotest" },
