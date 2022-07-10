@@ -7,3 +7,4 @@ python/ipython/profile_default/history.sqlite
 nvim/pack
 python/jupyter/lab/workspaces
 tmux/plugins
+tmux/resurrect
