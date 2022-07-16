@@ -1,10 +1,15 @@
 function config()
     local ok, M = pcall(require, "marks")
 
-    if not ok then
-        if vim.g.debug_plugin_loaders then
+    if vim.g.debug_plugin_loaders then
+        if ok then
+            print("Loaded module: marks")
+        else
             print("Failed to load module: marks")
         end
+    end
+
+    if not ok then
         return
     end
 

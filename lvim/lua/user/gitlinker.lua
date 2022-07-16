@@ -1,10 +1,14 @@
 function config()
     local ok, M = pcall(require, "gitlinker")
-
-    if not ok then
-        if vim.g.debug_plugin_loaders then
+    if vim.g.debug_plugin_loaders then
+        if ok then
+            print("Loaded module: gitlinker")
+        else
             print("Failed to load module: gitlinker")
         end
+    end
+
+    if not ok then
         return
     end
 

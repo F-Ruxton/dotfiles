@@ -1,10 +1,15 @@
 function config()
     local ok, M = pcall(require, "octo")
 
-    if not ok then
-        if vim.g.debug_plugin_loaders then
+    if vim.g.debug_plugin_loaders then
+        if ok then
+            print("Loaded module: octo")
+        else
             print("Failed to load module: octo")
         end
+    end
+
+    if not ok then
         return
     end
 

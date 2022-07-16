@@ -1,10 +1,15 @@
 function config()
     local ok, M = pcall(require, "neoscroll")
 
-    if not ok then
-        if vim.g.debug_plugin_loaders then
+    if vim.g.debug_plugin_loaders then
+        if ok then
+            print("Loaded module: neoscroll")
+        else
             print("Failed to load module: neoscroll")
         end
+    end
+
+    if not ok then
         return
     end
 

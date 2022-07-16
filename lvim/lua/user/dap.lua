@@ -1,8 +1,14 @@
 local ok, dap = pcall(require, "dap")
-if not ok then
-    if vim.g.debug_plugin_loaders then
+
+if vim.g.debug_plugin_loaders then
+    if ok then
+        print("Loaded module: dap")
+    else
         print("Failed to load module: dap")
     end
+end
+
+if not ok then
     return
 end
 

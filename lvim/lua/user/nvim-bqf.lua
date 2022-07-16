@@ -1,10 +1,15 @@
 function config()
     local ok, M = pcall(require, "bfq")
 
-    if not ok then
-        if vim.g.debug_plugin_loaders then
+    if vim.g.debug_plugin_loaders then
+        if ok then
+            print("Loaded module: bfq")
+        else
             print("Failed to load module: bfq")
         end
+    end
+
+    if not ok then
         return
     end
 

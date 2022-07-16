@@ -1,5 +1,10 @@
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 
+lvim.builtin.which_key.mappings["a"] = {
+    name = "Aerial",
+    a = { '<Cmd>AerialToggle!<CR>', "Toggle" },
+}
+
 lvim.builtin.which_key.mappings["t"] = {
     name = "+Trouble",
     d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },

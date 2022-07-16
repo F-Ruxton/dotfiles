@@ -1,10 +1,15 @@
 function config()
     local ok, M = pcall(require, "hop")
 
-    if not ok then
-        if vim.g.debug_plugin_loaders then
+    if vim.g.debug_plugin_loaders then
+        if ok then
+            print("Loaded module: hop")
+        else
             print("Failed to load module: hop")
         end
+    end
+
+    if not ok then
         return
     end
 
