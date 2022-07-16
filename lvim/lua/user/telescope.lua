@@ -1,7 +1,18 @@
 -- Telescope
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
-local _, actions = pcall(require, "telescope.actions")
+
+local ok, M = pcall(require, "telescope")
+
+if not ok then
+    if vim.g.debug_plugin_loaders then
+        print("Failed to load module: telescope")
+    end
+    return
+end
+
+local actions = require("telescope.actions")
+
 lvim.builtin.telescope.defaults.mappings = {
     -- for input mode
     i = {
@@ -16,3 +27,14 @@ lvim.builtin.telescope.defaults.mappings = {
         ["<C-k>"] = actions.move_selection_previous,
     },
 }
+
+M.setup({
+    extensions = {
+        ["ui-select"] = {
+            require("telescope.themes").get_dropdown {}
+        }
+    }
+})
+
+M.load_extension("ui-select")
+M.load_extension('harpoon')
