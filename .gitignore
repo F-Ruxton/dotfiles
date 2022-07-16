@@ -8,3 +8,4 @@ nvim/pack
 python/jupyter/lab/workspaces
 tmux/plugins
 tmux/resurrect
+lvim/plugin
