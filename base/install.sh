@@ -21,12 +21,12 @@ fi
 
 echo "Machine OS = ${machine}"
 
-if [ "$run_pre" -eq "true" ] ; then
+if [ "$run_pre" = "true" ] ; then
     echo "Running common_pre.sh"
     . "$SCRIPT_DIR/_common_pre.sh" "$machine"
 fi
 
-if [ "$run_pre" -eq "true" ] ; then
+if [ "$run_pre" = "true" ] ; then
     case "$machine" in
         Mac) script=_brew.sh;;
         Linux) script=_apt.sh;;
@@ -36,7 +36,7 @@ if [ "$run_pre" -eq "true" ] ; then
     . "$SCRIPT_DIR/$script"
 fi
 
-if [ "$run_pre" -eq "true" ] ; then
+if [ "$run_pre" = "true" ] ; then
     echo "Running common_post.sh"
     . "$SCRIPT_DIR/_common_post.sh" "$SCRIPT_DIR"
 fi
