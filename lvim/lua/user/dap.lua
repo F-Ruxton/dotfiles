@@ -1,20 +1,32 @@
-local status_ok, dap = pcall(require, "dap")
-if not status_ok then
+local ok, dap = pcall(require, "dap")
+if not ok then
+    if vim.g.debug_plugin_loaders then
+        print("Failed to load module: dap")
+    end
     return
 end
 
-local status_ok, dapui = pcall(require, "dapui")
-if not status_ok then
+local ok, dapui = pcall(require, "dapui")
+if not ok then
+    if vim.g.debug_plugin_loaders then
+        print("Failed to load module: dapui")
+    end
     return
 end
 
-local status_ok, dappython = pcall(require, "dap-python")
-if not status_ok then
+local ok, dappython = pcall(require, "dap-python")
+if not ok then
+    if vim.g.debug_plugin_loaders then
+        print("Failed to load module: dap-python")
+    end
     return
 end
 
-local status_ok, dapvt = pcall(require, "nvim-dap-virtual-text")
-if not status_ok then
+local ok, dapvt = pcall(require, "nvim-dap-virtual-text")
+if not ok then
+    if vim.g.debug_plugin_loaders then
+        print("Failed to load module: nvim-dap-virtual-text")
+    end
     return
 end
 
@@ -108,7 +120,13 @@ lvim.keys.visual_mode["<C-v>"] = ":lua require('dapui').eval(function () vim.fn.
 dappython.setup("/usr/local/anaconda3/envs/debugpy/bin/python")
 dappython.test_runner = "pytest"
 
+-- To pick up conda env:
+-- local get_python_path = function()
+--   local venv_path = os.getenv('VIRTUAL_ENV') or os.getenv('CONDA_PREFIX')
+--   ...
+
 dap.configurations.python = dap.configurations.python or {}
+
 table.insert(
     dap.configurations.python,
     {
@@ -126,34 +144,3 @@ table.insert(
         }
     }
 )
-
--- local conda_venv_path = function()
---   local conda_prefix = os.getenv('CONDA_PREFIX')
-
---   if conda_prefix then
---     local handle = io.popen("conda info -base")
-
---     if handle then
---       local conda_base = handle:read("*a")
---       handle:close()
---       conda_base = conda_base:gsub("[\n\r]", "")
-
---       if conda_prefix ~= conda_base then
---         return conda_prefix
---       end
---     end
---     return nil
---   end
--- end
-
--- local get_python_path = function()
---   local venv_path = os.getenv('VIRTUAL_ENV') or os.getenv('CONDA_PREFIX')
-
---   if venv_path then
---     if is_windows() then
---       return venv_path .. '\\Scripts\\python.exe'
---     end
---     return venv_path .. '/bin/python'
---   end
---   return nil
--- end
