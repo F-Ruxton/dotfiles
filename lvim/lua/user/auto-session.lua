@@ -1,13 +1,17 @@
-local ok, M = pcall(require, "auto-session")
+function config()
+    local ok, M = pcall(require, "auto-session")
 
-if not ok then
-    if vim.g.debug_plugin_loaders then
-        print("Failed to load module: auto-session")
+    if not ok then
+        if vim.g.debug_plugin_loaders then
+            print("Failed to load module: auto-session")
+        end
+        return
     end
-    return
+
+    M.setup {
+        log_level = 'info',
+        auto_session_suppress_dirs = { '~/', '~/Projects' }
+    }
 end
 
-M.setup {
-    log_level = 'info',
-    auto_session_suppress_dirs = { '~/', '~/Projects' }
-}
+return { "rmagatti/auto-session", config = config }

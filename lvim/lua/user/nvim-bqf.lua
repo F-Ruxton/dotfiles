@@ -1,29 +1,37 @@
-local ok, M = pcall(require, "bfq")
+function config()
+    local ok, M = pcall(require, "bfq")
 
-if not ok then
-    if vim.g.debug_plugin_loaders then
-        print("Failed to load module: bfq")
+    if not ok then
+        if vim.g.debug_plugin_loaders then
+            print("Failed to load module: bfq")
+        end
+        return
     end
-    return
+
+    M.setup({
+        auto_enable = true,
+        preview = {
+            win_height = 12,
+            win_vheight = 12,
+            delay_syntax = 80,
+            border_chars = { "┃", "┃", "━", "━", "┏", "┓", "┗", "┛", "█" },
+        },
+        func_map = {
+            vsplit = "",
+            ptogglemode = "z,",
+            stoggleup = "",
+        },
+        filter = {
+            fzf = {
+                action_for = { ["ctrl-s"] = "split" },
+                extra_opts = { "--bind", "ctrl-o:toggle-all", "--prompt", "> " },
+            },
+        },
+    })
 end
 
-M.setup({
-    auto_enable = true,
-    preview = {
-        win_height = 12,
-        win_vheight = 12,
-        delay_syntax = 80,
-        border_chars = { "┃", "┃", "━", "━", "┏", "┓", "┗", "┛", "█" },
-    },
-    func_map = {
-        vsplit = "",
-        ptogglemode = "z,",
-        stoggleup = "",
-    },
-    filter = {
-        fzf = {
-            action_for = { ["ctrl-s"] = "split" },
-            extra_opts = { "--bind", "ctrl-o:toggle-all", "--prompt", "> " },
-        },
-    },
-})
+return {
+    "kevinhwang91/nvim-bqf",
+    event = { "BufRead", "BufNew" },
+    config = config,
+}

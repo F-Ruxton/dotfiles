@@ -1,16 +1,24 @@
-local ok, M = pcall(require, "nvim-lastplace")
+function config()
+    local ok, M = pcall(require, "nvim-lastplace")
 
-if not ok then
-    if vim.g.debug_plugin_loaders then
-        print("Failed to load module: ")
+    if not ok then
+        if vim.g.debug_plugin_loaders then
+            print("Failed to load module: nvim-lastplace")
+        end
+        return
     end
-    return
+
+    M.setup({
+        lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
+        lastplace_ignore_filetype = {
+            "gitcommit", "gitrebase", "svn", "hgcommit",
+        },
+        lastplace_open_folds = true,
+    })
 end
 
-M.setup({
-    lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
-    lastplace_ignore_filetype = {
-        "gitcommit", "gitrebase", "svn", "hgcommit",
-    },
-    lastplace_open_folds = true,
-})
+return {
+    "ethanholz/nvim-lastplace",
+    event = "BufRead",
+    config = config,
+}
