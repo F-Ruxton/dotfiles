@@ -14,10 +14,10 @@ lvim.plugins = {
     require("user.nvim-dap-virtual-text"),
 
     -- Git
-    require("user.gitlinker"),
-    -- require("user.gh"),
     require("user.diffview"),
+    require("user.gitlinker"),
     require("user.neogit"),
+    require("user.octo"),
 
     -- General
     require("user.aerial"),
@@ -36,7 +36,6 @@ lvim.plugins = {
     require("user.nvim-bqf"),
     require("user.nvim-lastplace"),
     require("user.nvim-treesitter-textobjects"),
-    require("user.octo"),
     require("user.refactoring"),
     require("user.ropevim"),
     require("user.sniprun"),
