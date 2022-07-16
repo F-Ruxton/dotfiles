@@ -26,11 +26,12 @@ alias prp="poetry run python"
 alias c="conda"
 alias cdeactivate="conda deactivate"
 alias ci="conda install"
+alias cicf="conda install -c conda-forge"
 alias cs="conda search"
 
 alias m="mamba"
-alias mdeactivate="mamba deactivate"
 alias mi="mamba install"
+alias micf="mamba install -c conda-forge"
 
 function pick_env() {
   local env
@@ -51,10 +52,6 @@ function execute_with_env() {
 
 function caf() {
   execute_with_env "conda activate" "$1"
-}
-
-function maf() {
-  execute_with_env "mamba activate" "$1"
 }
 
 function cer() {
@@ -95,38 +92,17 @@ function cec() {
     python_version="$2"
   fi
 
-  if [ "$MAC_ARCH" = "M1" ] ; then
-    if [ -n "$env_file" ] ; then
-      echo "Creating conda environment from file: $env_file"
-      conda env create -f "$env_file" "${@:3}"
-    else
-      echo "Creating conda environment $env_name (python=$python_version)"
-      conda create --name "$env_name" python="$python_version" "${@:3}" -y
-    fi
+  if [ -n "$env_file" ] ; then
+    echo "Creating conda environment from file: $env_file"
+    CONDA_SUBDIR=osx-64 conda env create -f "$env_file" "${@:3}"
   else
-    if [ -n "$env_file" ] ; then
-      echo "Creating conda environment from file: $env_file"
-      CONDA_SUBDIR=osx-64 conda env create -f "$env_file" "${@:3}"
-    else
-      echo "Creating conda environment $env_name (python=$python_version)"
-      CONDA_SUBDIR=osx-64 conda create --name "$env_name" python="$python_version" "${@:3}" -y
-    fi
+    echo "Creating conda environment $env_name (python=$python_version)"
+    CONDA_SUBDIR=osx-64 conda create --name "$env_name" python="$python_version" "${@:3}" -y
   fi
 
   echo "Activating environment $_env_name"
 
-  if [ "$MAC_ARCH" = "M1" ] ; then
-    conda activate "$_env_name"
-  else
-    conda activate "$_env_name"
-    conda env config vars set CONDA_SUBDIR=osx-64
-    conda deactivate
-    conda activate "$_env_name"
-
-    echo "Running OS checks..."
-    python -c "import platform;print(platform.machine())"
-    echo "CONDA_SUBDIR: $CONDA_SUBDIR"
-  fi
+  conda activate "$_env_name"
 }
 
 function conda-nb-kernel-from-env() {

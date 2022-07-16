@@ -16,11 +16,12 @@ alias pyc="python -c"
 alias c="conda"
 alias cdeactivate="conda deactivate"
 alias ci="conda install"
+alias cicf="conda install -c conda-forge"
 alias cs="conda search"
 
 alias m="mamba"
-alias mdeactivate="mamba deactivate"
 alias mi="mamba install"
+alias micf="mamba install -c conda-forge"
 
 function pick_env() {
   local env
