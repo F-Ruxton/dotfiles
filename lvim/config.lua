@@ -58,6 +58,21 @@ lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.dap.active = true
 
 
+-- Make toggleterm remember terminal sizes
+lvim.builtin.terminal.persist_size = true
+
+-- Open vertial splits bigger
+lvim.builtin.terminal.size = function(term)
+    if term.direction == "horizontal" then
+        return 15
+    elseif term.direction == "vertical" then
+        return vim.o.columns * 0.4
+    else
+        return 20
+    end
+end
+-- }}}
+
 -- keymappings {{{
 lvim.leader = "space"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
