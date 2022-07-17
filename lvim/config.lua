@@ -31,11 +31,7 @@ vim.opt.updatetime = 300 -- Reduce time for highlighting other references
 vim.opt.redrawtime = 10000 -- Allow more time for loading syntax on large files
 -- }}}
 
--- lvim config {{{
--- General lvim
-lvim.log.level = "warn"
-lvim.format_on_save = true
-
+-- themes {{{
 lvim.colorscheme = "kanagawa"
 
 -- lvim.colorscheme = "melange"
@@ -43,20 +39,14 @@ lvim.colorscheme = "kanagawa"
 
 -- vim.g.tokyonight_style = "day"
 -- lvim.colorscheme = "tokyonight"
+-- }}}
 
+-- lvim config {{{
+-- General lvim
+lvim.log.level = "warn"
+lvim.format_on_save = true
 lvim.lsp.diagnostics.virtual_text = false
 
--- keymappings [view all the defaults by pressing <leader>Lk]
-lvim.leader = "space"
-lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-
--- unmap a default keymapping
--- vim.keymap.del("n", "<C-Up>")
-
--- override a default keymapping
--- lvim.keys.normal_mode["<C-q>"] = ":q<cr>" -- or vim.keymap.set("n", "<C-q>", ":q<cr>" )
-
--------------------------------------------------------------------------------
 -- User config for lunarvim-bundled plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
@@ -67,9 +57,18 @@ lvim.builtin.nvimtree.setup.view.side = "left"
 -- lvim.builtin.nvimtree.show_icons.git = 0
 lvim.builtin.dap.active = true
 
--------------------------------------------------------------------------------
--- Commands
--- Autocommands (https://neovim.io/doc/user/autocmd.html)
+
+-- keymappings {{{
+lvim.leader = "space"
+lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+
+-- vim.keymap.del("n", "<leader>/")
+
+lvim.keys.normal_mode["<C-p><C-p>"] = "<cmd>lua _python_toggle()<CR>"
+-- }}}
+
+-- autocommands {{{
+-- Autocommands: https://neovim.io/doc/user/autocmd.html
 
 vim.api.nvim_create_autocmd("BufEnter", {
     pattern = { "config.lua" },
@@ -148,6 +147,7 @@ lvim.plugins = {
     require("user.targets"),
     require("user.telescope-ui-select"),
     require("user.todo-comments"),
+    require("user.toggleterm"),
     require("user.trouble"),
     require("user.vim-abolish"),
     require("user.vim-commentary"),
@@ -162,6 +162,7 @@ lvim.plugins = {
 }
 -- }}}
 
+-- for some reason this does not run
 require('aerial').setup({})
 
 require("user.dap")
