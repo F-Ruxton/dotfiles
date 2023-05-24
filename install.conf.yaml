@@ -17,6 +17,7 @@
     ~/.ipython: python/ipython
     ~/.jupyter: python/jupyter
     ~/.vscode: vscode
+    ~/.ideavimrc: idea/ideavimrc
     ~/.task: taskwarrior/task
     ~/.taskrc: taskwarrior/taskrc
     ~/.taskopenrc: taskwarrior/taskopenrc
